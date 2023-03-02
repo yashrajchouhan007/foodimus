@@ -1,0 +1,19 @@
+{
+  "title.ambassador": "Let's browse",
+  "subtitle.ambassador": "Find your favorite Foodimus-ambassador",
+  "title.meal-plan": "Let's browse",
+  "subtitle.meal-plan": "Find the right meal plan for you",
+  "tab-ambassador": "Ambassadors",
+  "tab-meal-plan": "Meal plans",
+  "ambassador.title.0": "No ambassadors available",
+  "ambassador.title.1": "Browsing 1 ambassador",
+  "ambassador.title.2": "Browsing {{count}} ambassadors",
+  "meal-plan.title.0": "No meal plans available",
+  "meal-plan.title.1": "Browsing 1 meal plan",
+  "meal-plan.title.2": "Browsing {{count}} meal plans",
+  "meal-plan.item.tab.days.0": "0\ndays",
+  "meal-plan.item.tab.days.1": "1\nday",
+  "meal-plan.item.tab.days.2": "{{days}}\ndays",
+  "meal-plan.item.button.moreinfo": "More info",
+  "ambassador.item.button.moreinfo": "Check profile"
+}

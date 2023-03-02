@@ -1,0 +1,7 @@
+{
+  "calendar.title": "Calendar",
+
+  "meals.item.calories": "{{calories}} kcal",
+  "meals.item.nutrients": "{{protein}}g protein\n{{carbs}}g carbs\n{{fat}}g fat",
+  "meals.total.title": "Total nutrition overview"
+}

@@ -1,0 +1,6 @@
+{
+  "403.content": "# You're not supposed to be here!\n\nYou don't have access to this page. Are you trying to be sneaky? \uD83E\uDDD0\n\n[Return home](/)",
+  "404.content": "# Page not found\n\nWe've looked everywhere, but the page you requested could not be found!\n\n[Return home](/)",
+  "500.content": "# Whoops!\n\nAn error occurred while loading the page. Our team has been notified!\n\n[Return home](/)",
+  "503.content": "# There's something wrong here\n\nAn error occurred while loading the page. This could be temporary though. If this keeps occurring, please reach out to us at [hello@foodimus.com](mailto:hello@foodimus.com)\n\n[Return home](/)"
+}

@@ -1,0 +1,17 @@
+{
+  "current-mealplan.title": "Current meal plan",
+  "previous-mealplan.title": "Your previous plans",
+  "current-mealplan.tab.days.0": "0\ndays",
+  "current-mealplan.tab.days.1": "1\nday",
+  "current-mealplan.tab.days.2": "{{days}}\ndays",
+  "current-mealplan.progress.title": "Progress",
+  "current-mealplan.progress.progress.0": "{{current}}/0 days",
+  "current-mealplan.progress.progress.1": "{{current}}/1 day",
+  "current-mealplan.progress.progress.2": "{{current}}/{{total}} days",
+  "current-mealplan.button.today": "Your meal plan today",
+  "current-mealplan.button.info": "More information",
+  "previous-mealplan.button.activate": "Activate",
+  "current-meal-plan.placeholder.title": "No active meal plan",
+  "current-meal-plan.placeholder.content": "You don't have an active meal plan yet!",
+  "current-meal-plan.placeholder.button-browse": "Browse meal plans"
+}

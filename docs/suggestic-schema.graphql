@@ -1,0 +1,3989 @@
+# Exposes a URL that specifies the behaviour of this scalar.
+directive @specifiedBy(
+  # The URL that specifies the behaviour of this scalar.
+  url: String!
+) on SCALAR
+enum ActionType {
+  DECREASE
+  INCREASE
+}
+
+enum ActivityLevel {
+  EXERCISE_1
+  EXERCISE_1_2
+  EXERCISE_2
+  EXERCISE_3_MORE
+  NOT_ACTIVE
+}
+
+type AddFavoriteArticle {
+  message: String!
+  success: Boolean!
+}
+
+type AddFoodLog {
+  message: String!
+  success: Boolean!
+}
+
+type AddRecipesToShoppingList {
+  message: String
+  success: Boolean
+}
+
+type AddToShoppingList {
+  message: String
+  success: Boolean
+}
+
+type Adherence {
+  color: AdherenceColor
+  icon: Icon
+  isRecommended: Boolean
+  reason: String
+  score: Float
+  title: String
+}
+
+enum AdherenceColor {
+  BLUE
+  GREEN
+  GREY
+  RED
+  YELLOW
+}
+
+type Aggregate implements Node {
+  aggregateMeta: AggregateMeta
+  aisleName: String
+  comment: String
+  createdAt: DateTime!
+  databaseId: String
+  grams: Float
+  id: ID!
+  ingredient: String
+  isCleared: Boolean!
+  isDone: Boolean!
+  listitemSet(
+    after: String
+    before: String
+    first: Int
+    last: Int
+    offset: Int
+    recipe: ID
+  ): ListItemConnection!
+  meta: JSONString!
+  profile: ProfileType!
+  quantity: Int
+  servingEquivalent: Float
+  unit: String
+  updatedAt: DateTime!
+}
+
+type AggregateConnection {
+  edges: [AggregateEdge]!
+  pageInfo: PageInfo!
+}
+
+type AggregateEdge {
+  cursor: String!
+  node: Aggregate
+}
+
+type AggregateMeta {
+  aisle: String
+  grams: Float @deprecated(reason: "Not used, will be removed")
+  ids: [String]
+  idsContribution: [Contribution]
+  name: String
+  qty: Int
+  rawQty: Float
+}
+
+type Answer {
+  answer: String
+  id: ID
+  selected: Boolean
+  type: HabitAnswerType!
+}
+
+type Appointment {
+  appointmentType: AppointmentType!
+  attendees: [Attendee!]!
+  contactType: CalendarContactType!
+  description: String
+  end: DateTime!
+  id: ID!
+  meetingUrl: String
+  start: DateTime!
+  status: EventStatus!
+  title: String!
+}
+
+type AppointmentCredit {
+  appointmentType: AppointmentType!
+  id: ID!
+  value: Int!
+}
+
+type AppointmentCredits {
+  credits: [AppointmentCredit!]!
+}
+
+enum AppointmentMultiCoachType {
+  ANY_COACH_AVAILABLE
+  COLLECTIVE
+  INDIVIDUAL
+}
+
+type AppointmentType implements Node {
+  contactType: [String!]!
+  durationMin: Int!
+  id: ID!
+  multiCoachType: AppointmentMultiCoachType!
+  numberOfMember: Int!
+  title: String!
+}
+
+type AppointmentTypeConnection {
+  edges: [AppointmentTypeEdge]!
+  pageInfo: PageInfo!
+}
+
+type AppointmentTypeEdge {
+  cursor: String!
+  node: AppointmentType
+}
+
+type AppRestriction {
+  feature: String!
+  limitations: [Limitation!]!
+}
+
+type Attendee {
+  displayName: String
+  email: String!
+  status: EventParticipationStatus!
+}
+
+enum AttrDataType {
+  BOOLEAN
+  FLOAT
+  INT
+  STRING
+}
+
+enum BiologicalSex {
+  FEMALE
+  MALE
+}
+
+type BrandedFoodConnection {
+  count: Int
+  edges: [BrandedFoodEdge]!
+  pageInfo: PageInfo!
+}
+
+type BrandedFoodEdge {
+  cursor: String!
+  node: BrandedFoodNode
+}
+
+type BrandedFoodNode implements Node {
+  brandOwner: String!
+  brandedFoodCategory: String
+  calories: Float
+  dataType: String
+  description: String
+  foodDataId: String
+  gtinUpc: String!
+  householdServingFulltext: String
+  id: ID!
+  isActive: Boolean!
+  isCore: Boolean!
+  isGeneric: Boolean!
+  name: String!
+  nutrients: [Nutrient!]!
+  servingSize: Float!
+  servingSizeUnit: String!
+  tags: [String!]!
+}
+
+enum CalendarContactType {
+  GOOGLE_MEET
+  PHONE_CALL
+  VIDEO_CALL
+  ZOOM
+}
+
+type CaloriesPerServing {
+  ala: Float
+  carbs: Float
+  dha: Float
+  dpa: Float
+  epa: Float
+  fat: Float
+  monounsaturatedFat: Float
+  omega3: Float
+  polyunsaturatedFat: Float
+  protein: Float
+  saturatedFat: Float
+  transFat: Float
+}
+
+type CancelAppointment {
+  appointment: Appointment
+  message: String!
+  success: Boolean!
+}
+
+type ChangeMealPlannerDayMeal {
+  recipe: Recipe
+  success: Boolean
+}
+
+type CheckIntake {
+  message: String!
+  success: Boolean!
+}
+
+type Checklist {
+  icon: String
+  items: [ChecklistItem!]!
+  name: String!
+}
+
+type ChecklistItem {
+  category: String
+  checked: Boolean!
+  id: ID!
+  image: String!
+  subtitle: String
+  title: String!
+}
+
+type CheckTodayFoodEntry {
+  message: String!
+  success: Boolean!
+}
+
+type CheckTodaySupplementEntry {
+  message: String!
+  success: Boolean!
+}
+
+type ClearShoppingList {
+  success: Boolean
+}
+
+type ClearShoppingListCheckedItems {
+  success: Boolean
+}
+
+type Coach implements Node {
+  appointments(
+    end: DateTime!
+    start: DateTime!
+    timezone: String
+  ): [Appointment!]!
+  avatarUrl: String!
+  id: ID!
+  name: String!
+}
+
+type CoachConnection {
+  edges: [CoachEdge]!
+  pageInfo: PageInfo!
+}
+
+type CoachEdge {
+  cursor: String!
+  node: Coach
+}
+
+type CommonFoodConnection {
+  count: Int
+  edges: [CommonFoodEdge]!
+  pageInfo: PageInfo!
+}
+
+type CommonFoodEdge {
+  cursor: String!
+  node: CommonFoodNode
+}
+
+type CommonFoodNode implements Node {
+  dataType: String
+  description: String
+  foodDataId: String
+  id: ID!
+  isActive: Boolean!
+  isCore: Boolean!
+  isGeneric: Boolean!
+  name: String!
+  nutrients: [Nutrient!]!
+  portions: [Portion]
+  tags: [String!]!
+}
+
+type ContentCategoryType implements Node {
+  contentcategorySet(
+    after: String
+    before: String
+    first: Int
+    last: Int
+    offset: Int
+  ): ContentCategoryTypeConnection!
+  contentlibrarySet(
+    after: String
+    before: String
+    first: Int
+    last: Int
+    offset: Int
+  ): ContentLibraryTypeConnection!
+  databaseId: String
+  id: ID!
+  name: String!
+  slug: String!
+  subcategories: [ContentCategoryType!]
+}
+
+type ContentCategoryTypeConnection {
+  edges: [ContentCategoryTypeEdge]!
+  pageInfo: PageInfo!
+}
+
+type ContentCategoryTypeEdge {
+  cursor: String!
+  node: ContentCategoryType
+}
+
+input ContentLibraryOrderBy {
+  field: ContentLibraryOrderByField!
+  order: SortOrder
+}
+
+enum ContentLibraryOrderByField {
+  created_at
+  popularity
+}
+
+type ContentLibraryType implements Node {
+  categories: [ContentCategoryType]
+  databaseId: String
+  id: ID!
+  imageUrl: String!
+  interestedProfiles: [ProfileType!]!
+  isBlocked: Boolean!
+  order: Int!
+  programs(
+    after: String
+    before: String
+    first: Int
+    isActive: Boolean
+    isPremium: Boolean
+    last: Int
+    offset: Int
+  ): ProgramConnection!
+  sourceUrl: String!
+  subTitle: String
+  tags: [ContentTagType!]
+  title: String!
+}
+
+type ContentLibraryTypeConnection {
+  edges: [ContentLibraryTypeEdge]!
+  pageInfo: PageInfo!
+}
+
+type ContentLibraryTypeEdge {
+  cursor: String!
+  node: ContentLibraryType
+}
+
+type ContentTagType implements Node {
+  id: ID!
+  name: String!
+}
+
+type Contribution {
+  databaseId: String
+  eqv: Float
+}
+
+type CPC {
+  benefits: String
+  description: String
+  matchCustomAttribute: Boolean
+  name: String
+  simpleExamples: [String]
+}
+
+type CPCIngredient {
+  cpcName: String
+  priority: String
+  softmax: String
+  type: String
+}
+
+type CPCIngredientGroup {
+  avoid: [CPC]
+  decrease: [CPC]
+  increase: [CPC]
+}
+
+type CreateAppointment {
+  appointment: Appointment
+  message: String!
+  success: Boolean!
+}
+
+input CreateAppointmentInput {
+  appointmentType: ID!
+  coach: ID
+  contactType: CalendarContactType
+  datetime: DateTime!
+  note: String
+  timezone: String
+}
+
+type CreateDailyRecapEntry {
+  message: String!
+  success: Boolean!
+}
+
+type CreateGooglePlayTransaction {
+  message: String
+  success: Boolean
+}
+
+type CreateLabTestReport {
+  message: String!
+  report: LabTestReport
+  success: Boolean!
+}
+
+type CreateMealEntry {
+  message: String!
+  success: Boolean!
+}
+
+type CreateMealLogMutation {
+  databaseId: String
+  success: Boolean
+}
+
+type CreateMealPlanTemplate {
+  mealPlan: MealPlanTemplate
+  message: String!
+  success: Boolean!
+}
+
+type CreateMyBrandedFood {
+  message: String!
+  success: Boolean!
+}
+
+input CreateMyBrandedFoodInput {
+  brandOwner: String!
+  brandedFoodCategory: String
+  description: String
+  gtinUpc: String!
+  householdServingFulltext: String
+  name: String!
+  nutrients: [NutrientInput!]!
+  servingSize: Float!
+  servingSizeUnit: String!
+}
+
+type CreateMyChecklistItem {
+  message: String!
+  myChecklistItem: MyChecklistItem
+  success: Boolean!
+}
+
+type CreateMyChecklistItemLog {
+  message: String!
+  success: Boolean!
+}
+
+type CreateMyCommonFood {
+  message: String!
+  success: Boolean!
+}
+
+input CreateMyCommonFoodInput {
+  description: String
+  name: String
+  nutrients: [NutrientInput]
+  portions: [PortionInput!]!
+}
+
+type CreateMyRecipe {
+  message: String!
+  recipe: UserRecipe
+  success: Boolean!
+}
+
+input CreateMyRecipeInput {
+  courses: [String!]!
+  cuisines: [String!]!
+  ingredientLines: [String!]!
+  ingredients: [IngredientAmount!]!
+  instructions: [String!]
+  language: Language
+  mainImage: String
+  mealTimes: [MealTime!]!
+  name: String!
+  numberOfServings: Int!
+  squareImage: String
+  tags: [String!]
+  text: String
+  totalTime: String
+  totalTimeInSeconds: Int
+}
+
+type CreateNote {
+  message: String!
+  note: Note
+  success: Boolean!
+}
+
+type CreateOwnMealLogMutation {
+  databaseId: String
+  message: String
+  success: Boolean
+}
+
+type CreateOwnRecipe {
+  databaseId: String
+  success: Boolean
+}
+
+type CreateProfileBiomarkers {
+  success: Boolean
+}
+
+type CreateProfileCustomAttributes {
+  errors: [ErrorType]
+  success: Boolean
+}
+
+type CreateQuizResult {
+  errors: [ErrorType]
+  success: Boolean
+}
+
+type CreateUser {
+  message: String!
+  success: Boolean!
+  user: User
+}
+
+type CreateWeightEntry {
+  message: String
+  success: Boolean
+}
+
+type DailyChecklist {
+  days: [DayChecklistItems!]!
+  icon: String
+  name: String!
+}
+
+type DailyQuestion {
+  answers: [Answer]
+  done: Boolean
+  id: ID
+  imageUrl: String
+  isDefault: Boolean!
+  question: String
+  title: String
+}
+
+type DailyRecap {
+  date: Date!
+  questions: [DailyQuestion!]!
+}
+
+type Dashboard {
+  components: [EntryType!]!
+}
+
+type DashboardPDFType {
+  databaseId: String
+  id: ID!
+  name: String!
+  pdfUrl: String
+}
+
+scalar Date
+
+scalar DateTime
+
+type Day {
+  closing: String
+  description: String
+  opening: String
+}
+
+type DayChecklistItems {
+  date: Date!
+  items: [ChecklistItem!]!
+}
+
+enum DayStatus {
+  EMPTY_DAY
+  GOOD_DAY
+  PERFECT_DAY
+  REGULAR_DAY
+}
+
+type DebugMealPlanVariables {
+  conditions: DebugMPConditions
+  format: [String!]
+  kcal: Int!
+  restrictions: [String!]
+  skipIds: [String!]
+}
+
+type DebugMPConditions {
+  chocdf: Int
+  decrease: [String!]
+  distribution: DebugMPMealTimeValues
+  fat: Int
+  include: [String!]
+  increase: [String!]
+  maxEnercKcal: Int
+  maxIngredientsCount: DebugMPMealTimeValues
+  maxNumOfServings: Int
+  maxPrepTimeMinutes: DebugMPMealTimeValues
+  maxServingWeight: Int
+  minServingWeight: Int
+  omega3: Int
+  procnt: Int
+}
+
+type DebugMPMealTimeValues {
+  breakfast: Int
+  dinner: Int
+  lunch: Int
+  snack: Int
+}
+
+type DeleteDailyRecapEntry {
+  message: String!
+  success: Boolean!
+}
+
+type DeleteFoodLog {
+  message: String!
+  success: Boolean!
+}
+
+type DeleteLabTestReport {
+  message: String!
+  report: LabTestReport
+  success: Boolean!
+}
+
+type DeleteMealPlanTemplate {
+  mealPlan: MealPlanTemplate
+  message: String!
+  success: Boolean!
+}
+
+type DeleteMyBrandedFood {
+  message: String!
+  success: Boolean!
+}
+
+type DeleteMyChecklistItem {
+  message: String!
+  myChecklistItem: MyChecklistItem
+  success: Boolean!
+}
+
+type DeleteMyChecklistItemLog {
+  message: String!
+  success: Boolean!
+}
+
+type DeleteMyCommonFood {
+  message: String!
+  success: Boolean!
+}
+
+type DeleteMyRecipe {
+  message: String!
+  success: Boolean!
+}
+
+type DeleteNote {
+  message: String!
+  note: Note
+  success: Boolean!
+}
+
+type DeleteWeightEntry {
+  message: String!
+  success: Boolean!
+}
+
+enum DialogCollectionType {
+  BOOL
+  CHAR
+  DATETIME
+  INT
+}
+
+type DialogType {
+  action: String!
+  attachment: GenericScalar
+  catalog: String!
+  collectionType: DialogCollectionType
+  databaseId: String
+  defaultJump: String!
+  deviceAction: String!
+  endpoint: String!
+  field: String!
+  htmlUrl: String
+  id: ID!
+  jumpFalse: String!
+  messages: [String!]
+  name: String!
+  taskList: TaskListType
+  title: String
+  type: String!
+  uploadedVideo: String
+  valueType: DialogValueType
+  video: String!
+  videoThumbnail: String
+}
+
+enum DialogValueType {
+  DATE
+  DATETIME
+  FLOAT
+  INTEGER
+  NULL
+  STRING
+}
+
+enum DietaryTag {
+  DAIRY_FREE
+  GLUTEN_FREE
+  PLANT_BASED
+  VEGAN
+  VEGETARIAN
+}
+
+type DuplicateMealPlanTemplate {
+  mealPlan: MealPlanTemplate
+  message: String!
+  success: Boolean!
+}
+
+type EdamamFoodResult implements Node {
+  databaseId: String
+  id: ID!
+  label: String
+  servings: [Servings]
+}
+
+type Entry {
+  date: Date
+  value: Float
+}
+
+enum EntryType {
+  DAILY_RECAP
+  FOOD_LOGS
+  HYDRATION_TRACKER
+  MP_MEAL_TRACKER
+  TODAY_FOOD
+  TODAY_SUPPLEMENT
+  WEIGHT_TRACKER
+}
+
+type ErrorType {
+  field: String!
+  messages: [String!]!
+}
+
+enum EventParticipationStatus {
+  ACCEPTED
+  DECLINED
+  NEEDS_ACTION
+  TENTATIVE
+  UNKNOWN
+}
+
+enum EventStatus {
+  CANCELLED
+  CONFIRMED
+  TENTATIVE
+  UNKNOWN
+}
+
+enum EventType {
+  SESSION
+}
+
+enum FoodCategory {
+  BRANDED
+  COMMON
+  MEAL_PLAN_MEAL
+  MY_BRANDED
+  MY_COMMON
+  RECIPE
+  USER_RECIPE
+}
+
+input FoodFilter {
+  barcode: String
+  ingredients: [String!]
+  mealTime: MealTime
+  must: [FoodFilter!]
+  name: String
+  nutrients: [NutrientFilterInput!]
+  should: [FoodFilter!]
+  tags: [String]
+}
+
+type FoodLog {
+  date: Date!
+  foodId: ID!
+  grams: Float
+  id: ID!
+  mealTime: MealTime!
+  portionModifier: String
+  servings: Float
+  time: Time
+  type: FoodCategory
+}
+
+type FoodLogConnection {
+  edges: [FoodLogEdge]!
+  macros: [MacroNutrientLogged!]!
+  pageInfo: PageInfo!
+}
+
+type FoodLogEdge {
+  cursor: String!
+  node: FoodLog
+}
+
+type FoodProduct {
+  brand: String
+  databaseId: String
+  displayName: String
+  isIncomplete: Boolean
+  isVerified: Boolean
+  longDesc: String
+  mealType: MealType
+  name: String
+  nutritionalInfo: NutritionalInfo
+  serving: Int
+  servings: [Servings]
+}
+
+type GenerateMagicLink {
+  magicLink: String
+  message: String!
+  success: Boolean!
+}
+
+type GenerateMealPlan {
+  mealPlan: [MealPlanDay!]
+  message: String
+  success: Boolean
+}
+
+type GenerateSimpleMealPlan {
+  message: String
+  success: Boolean
+}
+
+scalar GenericScalar
+
+input GeoBoundingBox {
+  bottomRightLat: Float
+  bottomRightLon: Float
+  topLeftLat: Float
+  topLeftLon: Float
+}
+
+type GeoPoint {
+  lat: Float
+  lon: Float
+}
+
+type GooglePlayTransactionType implements Node {
+  createdAt: DateTime
+  databaseId: String
+  id: ID!
+  rawData: GenericScalar
+}
+
+type GooglePlayTransactionTypeConnection {
+  edges: [GooglePlayTransactionTypeEdge]!
+  pageInfo: PageInfo!
+}
+
+type GooglePlayTransactionTypeEdge {
+  cursor: String!
+  node: GooglePlayTransactionType
+}
+
+enum HabitAnswerType {
+  NEGATIVE
+  NEUTRAL
+  POSITIVE
+}
+
+type HardDeleteMyProfileMutation {
+  email: String
+  success: Boolean
+}
+
+type Hours {
+  friday: Day
+  monday: Day
+  saturday: Day
+  sunday: Day
+  thursday: Day
+  tuesday: Day
+  wednesday: Day
+}
+
+type Hydration {
+  date: Date
+  goal: Int
+  isToday: Boolean
+  quantity: Int
+}
+
+enum Icon {
+  ALERT
+  CROSS
+  UNKNOWN
+}
+
+type Ingredient {
+  confirmed: Boolean
+  cpc: String
+  name: String
+  priority: Float
+  type: String
+}
+
+input IngredientAmount {
+  foodId: ID!
+  grams: Float
+  milliliters: Float
+}
+
+type IngredientFoodFormat {
+  foodId: String!
+  grams: Float
+  milliliters: Float
+  name: String!
+}
+
+type IngredientLine {
+  comment: String
+  ingredient: String
+  ingredientLine: String
+  other: String
+  quantity: String
+  unit: String
+}
+
+union IngredientSearchResult = EdamamFoodResult
+type IngredientSearchResultConnection {
+  edges: [IngredientSearchResultEdge]!
+  pageInfo: PageInfo!
+}
+
+type IngredientSearchResultEdge {
+  cursor: String!
+  node: IngredientSearchResult
+}
+
+enum IntakeCategory {
+  FOOD
+  SUPPLEMENT
+}
+
+input IntValueByMealTime {
+  breakfast: Int
+  dinner: Int
+  lunch: Int
+  snack: Int
+}
+
+type JourneyDialogType {
+  dashboard: JourneyType!
+  databaseId: String
+  dialog: DialogType!
+  id: ID!
+  sortIndex: Int!
+}
+
+type JourneyProfileType implements Node {
+  createdAt: DateTime
+  dashboard: JourneyType!
+  databaseId: String
+  id: ID!
+  profile: ProfileType!
+  status: JourneyStatus
+  subJourneys: [JourneyProfileType!]!
+  updatedAt: DateTime
+}
+
+type JourneyProfileTypeConnection {
+  edges: [JourneyProfileTypeEdge]!
+  pageInfo: PageInfo!
+}
+
+type JourneyProfileTypeEdge {
+  cursor: String!
+  node: JourneyProfileType
+}
+
+enum JourneyStatus {
+  CLOSE
+  FINISH
+  OPEN
+}
+
+type JourneyType {
+  dashboardDialogs: [JourneyDialogType!]!
+  databaseId: String
+  daysIntoProgram: Int!
+  externalUrl: String!
+  header: String!
+  id: ID!
+  pdfs: [String!]!
+  pdfsRel: [DashboardPDFType!]!
+  program: Program
+  subJourneys: [JourneyType!]!
+  subTitle: String
+  title: String
+}
+
+scalar JSONString
+
+type LabTestReport {
+  createdAt: DateTime!
+  externalId: String
+  id: ID!
+  isVisible: Boolean!
+  labName: String!
+  orderId: String
+  orderingPhysician: String
+  productId: String
+  reportPdf: String!
+  requisitionId: String
+  sampleCollectionDate: Date
+  status: LabTestReportStatus
+  testDate: DateTime!
+  testName: String!
+  title: String!
+  updatedAt: DateTime!
+}
+
+type LabTestReportConnection {
+  edges: [LabTestReportEdge]!
+  pageInfo: PageInfo!
+}
+
+type LabTestReportEdge {
+  cursor: String!
+  node: LabTestReport
+}
+
+enum LabTestReportStatus {
+  CREATED
+  ERROR
+  FULFILLED
+  ORDERED
+  PROCESS_COMPLETE
+  RESULTS_READY
+  RETURNED_TO_LAB
+}
+
+enum Language {
+  EN
+  ES
+}
+
+type Limitation {
+  level: String!
+  limit: Int!
+  periodicity: String!
+  subscriptionId: ID!
+}
+
+type ListItem implements Node {
+  aggregation(
+    after: String
+    before: String
+    first: Int
+    id: UUID
+    last: Int
+    offset: Int
+  ): AggregateConnection!
+  aisleName: String
+  comment: String
+  createdAt: DateTime!
+  databaseId: String
+  errors: [String]
+  floatQuantity: Float
+  grams: Float
+  id: ID!
+  ingredient: String!
+  ingredientLine: String
+  isCleared: Boolean!
+  isDone: Boolean!
+  numberOfServings: Int
+  parse: JSONString!
+  profile: ProfileType!
+  quantity: String
+  quantityMetric: String
+  recipeId: String
+  recipeName: String
+  recipeServings: Int
+  unit: String
+  unitMetric: String
+  updatedAt: DateTime!
+}
+
+type ListItemConnection {
+  edges: [ListItemEdge]!
+  pageInfo: PageInfo!
+}
+
+type ListItemEdge {
+  cursor: String!
+  node: ListItem
+}
+
+type LocationAutocomplete {
+  city: String
+  daylightSavingsTimeFlag: Boolean
+  location: GeoPoint
+  state: String
+  suggest: String
+  timezone: Int
+  zipcode: String
+}
+
+type Logger implements Node {
+  adherenceScore: Float
+  host: String
+  id: ID!
+  indexedAt: DateTime
+  isPremium: Boolean
+  location: [Float]
+  method: String
+  path: String
+  profileId: String
+  program: String
+  requestBody: String
+  requestGet: GenericScalar
+  requestPost: GenericScalar
+  response: GenericScalar
+  restrictions: [String]
+  statusCode: String
+  uri: String
+  user: String
+  userId: String
+}
+
+type LoggerConnection {
+  edges: [LoggerEdge]!
+  pageInfo: PageInfo!
+}
+
+type LoggerEdge {
+  cursor: String!
+  node: Logger
+}
+
+type LoginUser {
+  accessToken: String
+  refreshToken: String
+}
+
+type LogRecipeIngredient {
+  id: String!
+  mealType: MealType!
+  name: String
+  quantity: Float!
+  serving: Int!
+}
+
+type MacroGoals {
+  bmr: Int
+  carbs: MacroNutrientGoal
+  cd: Int
+  dcig: Int
+  fat: MacroNutrientGoal
+  isUserGoal: Boolean
+  name: String
+  netcarbs: MacroNutrientGoal
+  protein: MacroNutrientGoal
+  tdee: Int
+}
+
+type MacroNutrientGoal {
+  color: String
+  goal: Int
+  left: Int
+  logged: Int
+  lowerLimit: Float
+  upperLimit: Float
+}
+
+type MacroNutrientLogged {
+  goal: Int
+  name: String!
+  value: Int!
+}
+
+input MacroNutrientsRangeInput {
+  ala: Range
+  calcium: Range
+  calories: Range
+  carbs: Range
+  carbsCalories: Range
+  cholesterol: Range
+  dha: Range
+  dpa: Range
+  epa: Range
+  fat: Range
+  fatCalories: Range
+  fiber: Range
+  iron: Range
+  monounsaturatedFat: Range
+  netcarbs: Range
+  polyunsaturatedFat: Range
+  potassium: Range
+  protein: Range
+  proteinCalories: Range
+  saturatedFat: Range
+  sodium: Range
+  sugar: Range
+  transFat: Range
+  vitaminA: Range
+  vitaminB6: Range
+  vitaminB12: Range
+  vitaminC: Range
+  vitaminD: Range
+  vitaminE: Range
+}
+
+type Meal {
+  calories: Float
+  id: String
+  maxNumOfServings: Int
+  meal: String
+  numOfServings: Int
+  recipe: Recipe
+}
+
+type MealCustomPlannerDays {
+  day1: [MealPlanDayRecipe]
+  day2: [MealPlanDayRecipe]
+  day3: [MealPlanDayRecipe]
+  day4: [MealPlanDayRecipe]
+  day5: [MealPlanDayRecipe]
+  day6: [MealPlanDayRecipe]
+  day7: [MealPlanDayRecipe]
+  day8: [MealPlanDayRecipe]
+}
+
+type MealLog implements Node {
+  adherence: Float
+  barcode: String
+  brand: String
+  createdAt: DateTime
+  databaseId: String
+  date: Date
+  extraInfo: String
+  id: ID!
+  ingredients: [LogRecipeIngredient]
+  isNew: Boolean
+  isVerified: Boolean
+  macrosLog: Nutrients
+  mealDatabaseId: String
+  mealTime: MealTime
+  mealType: MealType
+  mealTypeDisplayName: String
+  name: String
+  nutrients: Nutrients
+    @deprecated(reason: "Use nutritionalInfo or nutrientsPerServing instead")
+  nutrientsFull: NutrientsFull
+    @deprecated(reason: "Use nutritionalInfo or nutrientsPerServing instead")
+  nutritionalInfo: NutritionalInfo
+  quantity: Float
+  recipe: Recipe
+  secondaryInfoText: String
+  serving: Int
+  servingWeight: Float
+  servings: [Servings]
+  timestamp: DateTime
+  updatedAt: DateTime
+  userPid: String
+}
+
+type MealLogConnection {
+  edges: [MealLogEdge]!
+  pageInfo: PageInfo!
+}
+
+type MealLogEdge {
+  cursor: String!
+  node: MealLog
+}
+
+type MealLogMacroAggs {
+  chocdf: Float
+  fat: Float
+  fibtg: Float
+  netcarbs: Float
+  procnt: Float
+  sugar: Float
+}
+
+type MealPlanDay {
+  calories: Float
+  date(useDatetime: Boolean): String
+  day: Int
+  id: ID!
+  meals: [Meal]
+}
+
+type MealPlanDayRecipe {
+  mealTime: String
+  programDate: Date
+  recipe: Recipe
+}
+
+enum MealPlanDiversity {
+  HIGH
+  LOW
+  MEDIUM
+}
+
+type MealPlannerDays {
+  day1: MealPlannerDayTime
+  day2: MealPlannerDayTime
+  day3: MealPlannerDayTime
+  day4: MealPlannerDayTime
+  day5: MealPlannerDayTime
+  day6: MealPlannerDayTime
+  day7: MealPlannerDayTime
+  day8: MealPlannerDayTime
+}
+
+type MealPlannerDayTime {
+  breakfast: [Recipe]
+  dinner: [Recipe]
+  lunch: [Recipe]
+  programDate: Date
+  snack: [Recipe]
+}
+
+enum MealPlannerQueryType {
+  DAY_AGGREGATE
+  RAW
+  SUGGESTIONS
+}
+
+type MealPlanTemplate implements Node {
+  coachId: ID
+  createdAt: DateTime!
+  days: [MealPlanDay!]!
+  description: String!
+  id: ID!
+  isPublic: Boolean!
+  name: String!
+}
+
+type MealPlanTemplateConnection {
+  edges: [MealPlanTemplateEdge]!
+  pageInfo: PageInfo!
+}
+
+type MealPlanTemplateEdge {
+  cursor: String!
+  node: MealPlanTemplate
+}
+
+enum MealTime {
+  BREAKFAST
+  DINNER
+  LUNCH
+  SNACK
+}
+
+type MealTrack {
+  date: Date!
+  meal: Meal!
+  mealId: ID!
+  value: MealTrackStatus!
+}
+
+enum MealTrackStatus {
+  ATE
+  DELETE
+  OTHER_FOLLOWING
+  OTHER_NOT_FOLLOWING
+  SKIPPED
+}
+
+enum MealType {
+  MENU_ITEM
+  OWN_ITEM
+  OWN_RECIPE
+  RECIPE
+  USDA_MEAL
+}
+
+type MenuItem implements Node {
+  adherence: Adherence
+  annotation: GenericScalar
+  confirmedIngredients: [String]
+  course: String
+    @deprecated(
+      reason: "use `courses` a menu item can have more than one course"
+    )
+  courses: [String]
+  createdAt: DateTime
+  databaseId: String
+  deciderSource: String
+  deciderVersion: Int
+  description: String
+  favoritesCount: Int
+  hasNutrients: Boolean
+  id: ID!
+  indexedAt: DateTime
+  ingredients: [Ingredient]
+  isActive: Boolean
+  isAnnotated: Boolean
+  isIndexed: Boolean
+  isRecommended: Boolean
+  isSourceActive: Boolean
+  isUserFavorite: Boolean
+  isValidated: Boolean
+  language: String
+  maxPrice: Float
+  mayHave: [Ingredient]
+  mealTags: [String]
+  menu: String
+  minPrice: Float
+  name: String
+  nutrients: Nutrients @deprecated(reason: "use `nutritional_info`")
+  nutritionalInfo: NutritionalInfo
+  parent: String
+  portionSize: String
+  programScore: Float
+  programs: [String]
+  programsIds: [String]
+  restaurant: Restaurant
+  restaurantId: String
+  restaurantName: String
+  sectionName: String
+  tags: [String]
+  trustMe: Boolean
+  type: String
+  updatedAt: DateTime
+  usersFavorite: [String]
+}
+
+type MenuItemConnection {
+  edges: [MenuItemEdge]!
+  pageInfo: PageInfo!
+}
+
+type MenuItemEdge {
+  cursor: String!
+  node: MenuItem
+}
+
+input MPTCustomOptionsInput {
+  calories: Int
+  carbsPerc: Int
+  fatPerc: Int
+  format: [MealTime!]
+  program: ID
+  proteinPerc: Int
+}
+
+input MPTFromDaysInput {
+  fromDate: Date!
+  profileId: ID!
+  toDate: Date!
+}
+
+input MPTFromScratchDayInput {
+  meals: [MPTFromScratchMealInput!]!
+}
+
+input MPTFromScratchInput {
+  days: [MPTFromScratchDayInput!]!
+}
+
+input MPTFromScratchMealInput {
+  mealType: MealTime!
+  recipeId: ID!
+  servings: Int
+}
+
+enum MPVariety {
+  HIGH
+  LOW
+  MEDIUM
+}
+
+type Mutation {
+  addFavoriteArticle(articleId: ID!): AddFavoriteArticle
+  addFoodLog(
+    date: Date!
+    foodId: ID!
+    grams: Int
+    mealTime: MealTime!
+    milligrams: Int
+    portionModifier: String
+    servings: Float
+    time: Time
+  ): AddFoodLog!
+  addRecipesToShoppingList(recipeIds: [String]!): AddRecipesToShoppingList
+  addToShoppingList(recipeId: String!): AddToShoppingList
+  cancelAppointment(appointment: ID!): CancelAppointment
+  changeMealPlannerDayMeal(
+    day: Int!
+    mealTime: MealTime!
+    recipeId: String!
+  ): ChangeMealPlannerDayMeal
+  checkIntake(category: IntakeCategory!, date: Date!, itemId: ID!): CheckIntake!
+  checkTodayFood(date: Date!, itemId: ID!): CheckTodayFoodEntry
+    @deprecated(reason: "No longer supported. Use checkIntake instead")
+  checkTodaySupplement(date: Date!, itemId: ID!): CheckTodaySupplementEntry
+    @deprecated(reason: "No longer supported. Use checkIntake instead")
+  clearShoppingList: ClearShoppingList
+  clearShoppingListCheckedItems: ClearShoppingListCheckedItems
+  createAppointment(input: CreateAppointmentInput!): CreateAppointment
+  createDailyRecapEntry(
+    answerId: String!
+    date: Date!
+    questionId: String!
+  ): CreateDailyRecapEntry
+  createGooglePlayTransaction(
+    acknowledged: Boolean!
+    autoRenewing: Boolean!
+    orderId: String!
+    packageName: String!
+    productId: String!
+    purchaseState: Int!
+    purchaseTime: Float!
+    purchaseToken: String!
+    subscriptionSku: String!
+  ): CreateGooglePlayTransaction
+  createLabTestReport(
+    externalId: String
+    labName: String!
+    orderId: String
+    orderingPhysician: String
+    productId: String
+    reportPdf: Upload!
+    requisitionId: String
+    sampleCollectionDate: Date
+    status: LabTestReportStatus
+    testDate: DateTime!
+    testName: String!
+    title: String!
+  ): CreateLabTestReport
+  createMealEntry(mealId: ID!, value: MealTrackStatus): CreateMealEntry
+  createMealLog(
+    customServingEquivalent: Float
+    date: Date
+    mealDatabaseId: String!
+    mealTime: MealTime!
+    mealType: MealType!
+    quantity: Float!
+    serving: Float
+    time: Time
+  ): CreateMealLogMutation
+  createMealPlanTemplate(
+    coach: ID
+    customOptions: MPTCustomOptionsInput
+    description: String!
+    fromDays: MPTFromDaysInput
+    fromScratch: MPTFromScratchInput
+    isPublic: Boolean
+    name: String!
+  ): CreateMealPlanTemplate
+  createMyBrandedFoods(input: CreateMyBrandedFoodInput!): CreateMyBrandedFood
+  createMyChecklistItem(
+    header: String!
+    tags: [String!]
+    text: String
+  ): CreateMyChecklistItem
+  createMyChecklistItemLog(date: Date!, itemId: ID!): CreateMyChecklistItemLog!
+  createMyCommonFoods(input: CreateMyCommonFoodInput!): CreateMyCommonFood
+  createMyRecipe(input: CreateMyRecipeInput!): CreateMyRecipe
+  createNote(coach: ID, eventId: ID, text: String!, title: String!): CreateNote
+  createOwnMealLog(
+    barcode: String
+    brand: String
+    date: Date
+    logAfterCreation: Boolean
+    mealTime: MealTime
+    mealTimes: [MealTime]
+    mealType: MealType!
+    name: String!
+    ownNutrients: OwnNutrients!
+    ownServing: OwnServing!
+  ): CreateOwnMealLogMutation
+  createOwnRecipe(
+    ingredients: [OwnRecipeIngredient]
+    logAfterCreation: Boolean
+    quantity: Float!
+    recipeName: String!
+  ): CreateOwnRecipe
+  createProfileBiomarkers(
+    cholesterolLdl: Float
+    cortisol: Float
+    ferritin: Float
+    hba1c: Float
+    totalCholesterol: Float
+    vitaminB12: Float
+    vitaminD: Float
+  ): CreateProfileBiomarkers
+  createProfileCustomAttributes(
+    append: Boolean
+    attributes: [ProfileCustomAttribute!]!
+  ): CreateProfileCustomAttributes
+  createQuizResult(answers: [String]!, result: String!): CreateQuizResult
+  createUser(
+    birthdate: Date
+    email: String!
+    emailPasswordNotification: Boolean
+    extraData: JSONString
+    name: String!
+    password: String
+    phone: String
+    program: String
+    restrictions: [String]
+    subscription: ID
+  ): CreateUser
+  createWeightEntry(date: Date!, value: Float!): CreateWeightEntry
+  deleteDailyRecapEntry(date: Date!, questionId: String!): DeleteDailyRecapEntry
+  deleteFoodLog(id: ID!): DeleteFoodLog!
+  deleteLabTestReport(id: ID!): DeleteLabTestReport
+  deleteMealPlanTemplate(coach: ID, id: ID!): DeleteMealPlanTemplate
+  deleteMyBrandedFood(id: String!): DeleteMyBrandedFood
+  deleteMyChecklistItem(id: ID!): DeleteMyChecklistItem
+  deleteMyChecklistItemLog(date: Date!, itemId: ID!): DeleteMyChecklistItemLog!
+  deleteMyCommonFood(id: String!): DeleteMyCommonFood
+  deleteMyProfile: HardDeleteMyProfileMutation
+  deleteMyRecipe(id: ID!): DeleteMyRecipe
+  deleteNote(noteId: ID!): DeleteNote
+  deleteWeightEntry(date: Date!): DeleteWeightEntry
+  duplicateMealPlanTemplate(id: ID!): DuplicateMealPlanTemplate
+  generateMagicLink(email: String!): GenerateMagicLink
+  generateMealPlan(
+    addDays: Boolean
+    breakfastDistribution: Float
+    dinnerDistribution: Float
+    fromTemplate: ID
+    ignoreLock: Boolean
+    includeFavorites: Boolean
+    isCache: Boolean
+    kcalLimit: Float
+    lunchDistribution: Float
+    maxIngredientsCount: IntValueByMealTime
+    maxNumOfServings: Int
+    maxServingWeight: Int
+    maxTimeMinutes: IntValueByMealTime
+    minServingWeight: Int
+    repeat: DateTime
+    snackDistribution: Float
+    variety: MPVariety
+  ): GenerateMealPlan
+  generateSimpleMealPlan(
+    addDays: Boolean
+    boostAdherence: Boolean
+    filters: SimpleMPFiltersInput
+    ignoreLock: Boolean
+    repeat: DateTime
+    variety: MPVariety
+  ): GenerateSimpleMealPlan
+  login(userId: String!): LoginUser
+  profileMacroGoalsSettings(
+    activityLevel: ActivityLevel!
+    biologicalSex: BiologicalSex!
+    birthdate: Date!
+    goalsOn: Boolean!
+    height: Float!
+    isImperial: Boolean = true
+    startingWeight: Float!
+    targetWeight: Float!
+    weeklyWeightGoal: WeeklyWeightGoal!
+  ): ProfileMacroGoalsSettings
+  profileMealPlanSettings(
+    calories: Int!
+    carbsPerc: Float!
+    error: Float!
+    fatPerc: Float!
+    format: [MealTime]
+    omega3Perc: Float
+    proteinPerc: Float!
+  ): ProfileMealPlanSettings
+    @deprecated(
+      reason: "This doesn't allow doing settings reset. Use updateMealPlanSettings instead."
+    )
+  profileRestrictionsUpdate(
+    replace: Boolean
+    restrictions: [ID]
+  ): ProfileRestrictionsUpdate
+  publishEvent(
+    appVersion: String!
+    client: String!
+    eventType: EventType!
+    location: GenericScalar
+    timezone: String!
+  ): PublishEvent
+  purchaseMealRecipe(
+    externalId: String
+    profileId: String!
+    recipeId: ID!
+  ): PurchaseMealRecipe
+  removeFavoriteArticle(articleId: ID!): RemoveFavoriteArticle
+  removeFromShoppingList(recipeId: String!): RemoveFromShoppingList
+  removeMealLog(databaseId: String!): RemoveMealLogMutation
+  removeMealPlan: RemoveMealPlan
+  removeMealPlanRecipe(mealId: ID!): RemoveMealPlanRecipe
+  removeOwnMeal(databaseId: String!): RemoveOwnMeal
+  requestResetPassword(email: String!): RequestResetPassword
+  resetPassword(code: String!, newPassword: String!): ResetPassword
+  selectDailyRecapQuestions(questions: [ID!]!): SelectDailyRecapQuestions!
+  sendFeedback(message: String!, subject: String!): SendFeedback
+  sensitiveProfileAttributes(
+    attributes: String
+    signingPublicKey: String
+  ): SensitiveProfileAttributes
+  setMealPlanToTemplate(profileId: ID!, templateId: ID!): SetMealPlanToTemplate
+  startJourneys(daysUnlocked: Int, override: Boolean): StartJourneys
+  startOverMealPlan: StartOverMealPlan
+  swapMealPlanRecipe(
+    mealId: String
+    mealTag: MealTime
+    recipeId: String!
+    serving: Int
+  ): SwapMealPlanRecipe
+  toggleShoppingListItem(
+    isAggregate: Boolean!
+    itemId: String!
+  ): ToggleShoppingListItem
+  toggleTaskCompleted(keysHash: String!): ToggleTaskCompleted
+  uncheckIntake(
+    category: IntakeCategory!
+    date: Date!
+    itemId: ID!
+  ): UncheckIntake!
+  uncheckTodayFood(date: Date!, itemId: ID!): UncheckTodayFood
+    @deprecated(reason: "No longer supported. Use uncheckIntake instead")
+  uncheckTodaySupplement(date: Date!, itemId: ID!): UncheckTodaySupplement
+    @deprecated(reason: "No longer supported. Use uncheckIntake instead")
+  updateAppointment(input: UpdateAppointmentInput!): UpdateAppointment
+  updateAppointmentCredits(
+    appointmentType: ID!
+    decrease: Int
+    increase: Int
+    profile: ID!
+    value: Int
+  ): UpdateAppointmentCredits
+  updateHydration(action: ActionType!, date: Date!): UpdateHydration
+  updateJourneyStatus(
+    journeyId: String!
+    status: JourneyStatus!
+  ): UpdateJourneyStatus
+  updateLabTestReport(
+    externalId: String
+    id: ID!
+    labName: String
+    orderId: String
+    orderingPhysician: String
+    productId: String
+    reportPdf: Upload
+    requisitionId: String
+    sampleCollectionDate: Date
+    status: LabTestReportStatus
+    testDate: DateTime
+    testName: String
+    title: String
+  ): UpdateLabTestReport
+  updateMealLog(
+    customServingEquivalent: Float
+    databaseId: String!
+    date: Date
+    mealTime: MealTime
+    quantity: Float
+    serving: Float
+    time: Time
+  ): UpdateMealLogMutation
+  updateMealPlanSettings(
+    overwrite: UpdateMPSettingsInput
+    update: UpdateMPSettingsInput
+  ): UpdateMealPlanSettings
+  updateMealPlanTemplate(
+    coach: ID
+    description: String
+    id: ID!
+    isPublic: Boolean
+    mealPlanDays: MPTFromScratchInput
+    name: String
+  ): UpdateMealPlanTemplate
+  updateMyBrandedFood(
+    id: String!
+    input: UpdateMyBrandedFoodInput!
+  ): UpdateMyBrandedFood
+  updateMyChecklistItem(
+    header: String
+    id: ID!
+    tags: [String!]
+    text: String
+  ): UpdateMyChecklistItem
+  updateMyCommonFood(
+    id: String!
+    input: UpdateMyCommonFoodInput!
+  ): UpdateMyCommonFood
+  updateMyRecipe(id: ID!, input: UpdateMyRecipeInput!): UpdateMyRecipe
+  updateNote(coach: ID, noteId: ID!, text: String, title: String): UpdateNote
+  updateOwnMeal(
+    barcode: String
+    brand: String
+    databaseId: String!
+    date: Date
+    mealTime: MealTime
+    mealType: MealType
+    name: String
+    ownNutrients: OwnNutrients!
+    ownServing: OwnServing!
+  ): UpdateOwnMealMutation
+  updateOwnRecipe(
+    databaseId: String!
+    ingredients: [OwnRecipeIngredient]
+    quantity: Float
+    recipeName: String
+  ): UpdateOwnRecipe
+  updateProfile(
+    birthdate: Date
+    country: String
+    email: String
+    isImperial: Boolean
+    language: Language
+    mpDiversity: MealPlanDiversity
+    name: String
+    timezone: String
+  ): UpdateProfile
+  updateProfileBiomarkers(
+    cholesterolLdl: Float
+    cortisol: Float
+    ferritin: Float
+    hba1c: Float
+    totalCholesterol: Float
+    vitaminB12: Float
+    vitaminD: Float
+  ): UpdateProfileBiomarkers
+  updateShoppingListRecipeServings(
+    numberOfServings: Int!
+    recipeId: String!
+  ): UpdateShoppingListRecipeServings
+  updateSubscription(
+    profileId: String
+    subscriptionId: String!
+    userId: String
+  ): UpdateSubscription
+  updateUserProgram(programId: String!): UpdateUserProgram
+  userFavoriteMenuitem(menuitemId: String!): UserFavoriteMenuItem
+  userFavoriteRecipe(recipeId: String!): UserFavoriteRecipe
+  userFavoriteRestaurant(restaurantId: String!): UserFavoriteRestaurant
+}
+
+type MyBrandedFood implements Node {
+  brandOwner: String!
+  brandedFoodCategory: String
+  calories: Float
+  dataType: String
+  description: String
+  foodDataId: String
+  gtinUpc: String!
+  householdServingFulltext: String
+  id: ID!
+  isActive: Boolean!
+  isCore: Boolean!
+  isGeneric: Boolean!
+  name: String!
+  nutrients: [Nutrient!]!
+  profileId: String!
+  servingSize: Float!
+  servingSizeUnit: String!
+  tags: [String!]!
+}
+
+type MyBrandedFoodConnection {
+  count: Int!
+  edges: [MyBrandedFoodEdge]!
+  pageInfo: PageInfo!
+}
+
+type MyBrandedFoodEdge {
+  cursor: String!
+  node: MyBrandedFood
+}
+
+type MyChecklistItem implements Node {
+  createdAt: DateTime!
+  header: String!
+  id: ID!
+  tags: [String!]!
+  text: String
+  updatedAt: DateTime!
+}
+
+type MyChecklistItemConnection {
+  edges: [MyChecklistItemEdge]!
+  pageInfo: PageInfo!
+}
+
+type MyChecklistItemEdge {
+  cursor: String!
+  node: MyChecklistItem
+}
+
+type MyCommonFood implements Node {
+  dataType: String
+  description: String
+  foodDataId: String
+  id: ID!
+  isActive: Boolean!
+  isCore: Boolean!
+  isGeneric: Boolean!
+  name: String!
+  nutrients: [Nutrient!]!
+  portions: [Portion]
+  profileId: String!
+  tags: [String!]!
+}
+
+type MyCommonFoodConnection {
+  count: Int!
+  edges: [MyCommonFoodEdge]!
+  pageInfo: PageInfo!
+}
+
+type MyCommonFoodEdge {
+  cursor: String!
+  node: MyCommonFood
+}
+
+interface Node {
+  id: ID!
+}
+
+type Note implements Node {
+  createdAt: DateTime!
+  createdBy: Coach
+  id: ID!
+  text: String!
+  title: String!
+  updatedAt: DateTime!
+  updatedBy: Coach
+}
+
+type NoteConnection {
+  edges: [NoteEdge]!
+  pageInfo: PageInfo!
+}
+
+type NoteEdge {
+  cursor: String!
+  node: Note
+}
+
+type Nutrient {
+  amount: Float
+  name: String
+  type: NutrientEnum!
+  unit: String
+}
+
+enum NutrientEnum {
+  ACETIC_ACID
+  ALANINE
+  ALCOHOL_ETHYL
+  ARGININE
+  ASH
+  ASPARTIC_ACID
+  BETAINE
+  BETA_SITOSTANOL
+  BETA_SITOSTEROL
+  BIOTIN
+  BORON_B
+  BRASSICASTEROL
+  CAFFEINE
+  CALCIUM_CA
+  CAMPESTANOL
+  CAMPESTEROL
+  CARBOHYDRATE_BY_SUMMATION
+  CARBOHYDRATE_OTHER
+  CARBS
+  CAROTENE_ALPHA
+  CAROTENE_BETA
+  CHLORINE_CL
+  CHOLESTEROL
+  CHOLINE_FREE
+  CHOLINE_FROM_GLYCEROPHOSPHOCHOLINE
+  CHOLINE_FROM_PHOSPHOCHOLINE
+  CHOLINE_FROM_PHOSPHOTIDYL_CHOLINE
+  CHOLINE_FROM_SPHINGOMYELIN
+  CHOLINE_TOTAL
+  CHROMIUM_CR
+  CIS_BETA_CAROTENE
+  CIS_LUTEIN_ZEAXANTHIN
+  CIS_LYCOPENE
+  COBALT_CO
+  COPPER_CU
+  CRYPTOXANTHIN_ALPHA
+  CRYPTOXANTHIN_BETA
+  CYSTEINE
+  CYSTINE
+  DELTA_5_AVENASTEROL
+  DHA
+  DPA
+  ENERGY
+  EPA
+  EPIGALLOCATECHIN_3_GALLATE
+  FAT
+  FATTY_ACIDS_TOTAL_MONOUNSATURATED
+  FATTY_ACIDS_TOTAL_POLYUNSATURATED
+  FATTY_ACIDS_TOTAL_SATURATED
+  FATTY_ACIDS_TOTAL_TRANS
+  FATTY_ACIDS_TOTAL_TRANS_DIENOIC
+  FATTY_ACIDS_TOTAL_TRANS_MONOENOIC
+  FATTY_ACIDS_TOTAL_TRANS_POLYENOIC
+  FIBER_INSOLUBLE
+  FIBER_SOLUBLE
+  FIBER_TOTAL_DIETARY
+  FLUORIDE_F
+  FOLATE_DFE
+  FOLATE_FOOD
+  FOLATE_TOTAL
+  FOLIC_ACID
+  FRUCTOSE
+  GALACTOSE
+  GLUCOSE_DEXTROSE
+  GLUTAMIC_ACID
+  GLUTAMINE
+  GLYCINE
+  HISTIDINE
+  HYDROXYPROLINE
+  INOSITOL
+  INULIN
+  IODINE_I
+  IRON_FE
+  ISOLEUCINE
+  LACTIC_ACID
+  LACTOSE
+  LEUCINE
+  LUTEIN
+  LUTEIN_ZEAXANTHIN
+  LYCOPENE
+  LYSINE
+  MAGNESIUM
+  MALTOSE
+  MANGANESE_MN
+  METHIONINE
+  MOLYBDENUM_MO
+  NIACIN
+  NICKEL_NI
+  O5_FORMYLTETRAHYDROFOLIC_ACID_5_HCOH4
+  O5_METHYL_TETRAHYDROFOLATE_5_MTHF
+  O10_FORMYL_FOLIC_ACID_10HCOFA
+  O25_HYDROXYCHOLECALCIFEROL
+  PANTOTHENIC_ACID
+  PHENYLALANINE
+  PHOSPHORUS_P
+  PHYTOENE
+  PHYTOFLUENE
+  PHYTOSTEROLS
+  PHYTOSTEROLS_OTHER
+  POTASSIUM_K
+  PROLINE
+  PROTEIN
+  RETINOL
+  RIBOFLAVIN
+  RIBOSE
+  SELENIUM_SE
+  SERINE
+  SODIUM_NA
+  SORBITOL
+  SPECIFIC_GRAVITY_SP
+  STARCH
+  STIGMASTEROL
+  SUCROSE
+  SUGARS_ADDED
+  SUGARS_TOTAL_INCLUDING_NLEA
+  SUGARS_TOTAL_NLEA
+  SULFUR_S
+  TAURINE
+  THEOBROMINE
+  THIAMIN
+  THREONINE
+  TOCOPHEROL_BETA
+  TOCOPHEROL_DELTA
+  TOCOPHEROL_GAMMA
+  TOCOTRIENOL_ALPHA
+  TOCOTRIENOL_BETA
+  TOCOTRIENOL_DELTA
+  TOCOTRIENOL_GAMMA
+  TOTAL_FAT_NLEA
+  TOTAL_SUGAR_ALCOHOLS
+  TRANS_BETA_CAROTENE
+  TRANS_LYCOPENE
+  TRYPTOPHAN
+  TYROSINE
+  VALINE
+  VITAMIN_A_IU
+  VITAMIN_A_RAE
+  VITAMIN_B_6
+  VITAMIN_B_12
+  VITAMIN_B_12_ADDED
+  VITAMIN_C_TOTAL_ASCORBIC_ACID
+  VITAMIN_D2_ERGOCALCIFEROL
+  VITAMIN_D3_CHOLECALCIFEROL
+  VITAMIN_D_D2_D3
+  VITAMIN_D_D2_D3_INTERNATIONAL_UNITS
+  VITAMIN_E
+  VITAMIN_E_ADDED
+  VITAMIN_E_ALPHA_TOCOPHEROL
+  VITAMIN_E_LABEL_ENTRY_PRIMARILY
+  VITAMIN_K_DIHYDROPHYLLOQUINONE
+  VITAMIN_K_MENAQUINONE_4
+  VITAMIN_K_PHYLLOQUINONE
+  WATER
+  XYLITOL
+  ZEAXANTHIN
+  ZINC_ZN
+}
+
+input NutrientFilterInput {
+  nutrient: NutrientEnum!
+  range: RangeFilter
+}
+
+input NutrientInput {
+  amount: Float!
+  nutrient: NutrientEnum!
+  unit: String!
+}
+
+type Nutrients {
+  chocdf: Float
+  fat: Float
+  fibtg: Float
+  netcarbs: Float
+  procnt: Float
+  sugar: Float
+}
+
+type NutrientsFull {
+  ca: Float
+  chole: Float
+  cholesterol: Float
+  enercKcal: Float
+  energy: Float
+  fams: Float
+  fapu: Float
+  fasat: Float
+  fatrn: Float
+  fe: Float
+  fiber: Float
+  k: Float
+  na: Float
+  potassiumK: Float
+  saturatedFat: Float
+  sodiumNa: Float
+  transFats: Float
+  vitaIu: Float
+  vitc: Float
+}
+
+type NutrientsPerServing {
+  ala: Float
+  calcium: Float
+  calories: Float
+  carbs: Float
+  cholesterol: Float
+  choline: Float
+  copper: Float
+  dha: Float
+  dpa: Float
+  epa: Float
+  fat: Float
+  fiber: Float
+  iodine: Float
+  iron: Float
+  magnesium: Float
+  manganese: Float
+  molybdenum: Float
+  monounsaturatedFat: Float
+  netcarbs: Float
+  omega3: Float
+  phosphorus: Float
+  polyunsaturatedFat: Float
+  potassium: Float
+  protein: Float
+  saturatedFat: Float
+  selenium: Float
+  sodium: Float
+  sugar: Float
+  transFat: Float
+  vitaminA: Float
+  vitaminB1: Float
+  vitaminB2: Float
+  vitaminB3: Float
+  vitaminB5: Float
+  vitaminB6: Float
+  vitaminB7: Float
+  vitaminB9: Float
+  vitaminB12: Float
+  vitaminC: Float
+  vitaminD: Float
+  vitaminE: Float
+  vitaminK: Float
+  zinc: Float
+}
+
+type NutritionalInfo {
+  ala: Float
+  calcium: Float
+  calories: Float
+  carbs: Float
+  cholesterol: Float
+  choline: Float
+  copper: Float
+  dha: Float
+  dpa: Float
+  epa: Float
+  fat: Float
+  fiber: Float
+  iodine: Float
+  iron: Float
+  magnesium: Float
+  manganese: Float
+  molybdenum: Float
+  monounsaturatedFat: Float
+  netcarbs: Float
+  omega3: Float
+  phosphorus: Float
+  polyunsaturatedFat: Float
+  potassium: Float
+  protein: Float
+  saturatedFat: Float
+  selenium: Float
+  sodium: Float
+  sugar: Float
+  transFat: Float
+  vitaminA: Float
+  vitaminB1: Float
+  vitaminB2: Float
+  vitaminB3: Float
+  vitaminB5: Float
+  vitaminB6: Float
+  vitaminB7: Float
+  vitaminB9: Float
+  vitaminB12: Float
+  vitaminC: Float
+  vitaminD: Float
+  vitaminE: Float
+  vitaminK: Float
+  zinc: Float
+}
+
+type NutritionEstimates {
+  calories: Float
+  carbs: Float
+  fat: Float
+  protein: Float
+}
+
+type OutoCompleteConnection {
+  edges: [OutoCompleteEdge]!
+  pageInfo: PageInfo!
+}
+
+type OutoCompleteEdge {
+  cursor: String!
+  node: Suggestion
+}
+
+input OwnNutrients {
+  ca: Float
+  chocdf: Float!
+  chole: Float
+  enercKcal: Float
+  fams: Float
+  fapu: Float
+  fasat: Float
+  fat: Float!
+  fatrn: Float
+  fe: Float
+  fibtg: Float
+  k: Float
+  na: Float
+  procnt: Float!
+  sugar: Float
+  vitaIu: Float
+  vitc: Float
+}
+
+input OwnRecipeIngredient {
+  id: String!
+  mealType: MealType!
+  quantity: Float!
+  serving: Int!
+}
+
+input OwnServing {
+  equivalent: Float!
+  name: String!
+}
+
+type PageInfo {
+  endCursor: String
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+}
+
+type Portion {
+  amount: Float
+  gramWeight: Float
+  modifier: String
+  seqNum: Int
+  unit: String
+}
+
+input PortionInput {
+  amount: Float!
+  gramWeight: Float!
+  modifier: String
+  unit: String!
+}
+
+enum PriceRate {
+  RATE_0
+  RATE_1
+  RATE_2
+  RATE_3
+  RATE_4
+}
+
+enum ProfileBiologicalSex {
+  FEMALE
+  MALE
+}
+
+type ProfileBiomarkers {
+  cholesterolLdl: Float
+  cortisol: Float
+  createdAt: DateTime!
+  ferritin: Float
+  hba1c: Float
+  profile: ProfileType!
+  totalCholesterol: Float
+  updatedAt: DateTime!
+  vitaminB12: Float
+  vitaminD: Float
+}
+
+input ProfileCustomAttribute {
+  dataType: AttrDataType!
+  name: String!
+  value: GenericScalar!
+}
+
+type ProfileMacroGoalsSettings {
+  bmr: Int
+  cd: Int
+  dcig: Int
+  profile: ProfileType
+  success: Boolean
+  tdee: Int
+}
+
+type ProfileMealPlanSettings {
+  success: Boolean
+}
+
+enum ProfileMpDiversity {
+  HIGH
+  LOW
+  MEDIUM
+}
+
+type ProfileRecommendationType {
+  createdAt: DateTime
+  databaseId: String
+  id: UUID!
+  profile: ProfileType!
+  recommendation: RecommendationCatalogType
+  updatedAt: DateTime
+}
+
+type ProfileRestrictionsUpdate {
+  message: String!
+  restrictions: [ID!]
+  success: Boolean!
+}
+
+type ProfileType {
+  activityLevel: ActivityLevel
+  adherenceScore: Float!
+  age: Int
+  aggregateSet(
+    after: String
+    before: String
+    first: Int
+    id: UUID
+    last: Int
+    offset: Int
+  ): AggregateConnection!
+  appVersion: Float!
+  basalMetabolicRate: Int
+  biologicalSex: ProfileBiologicalSex
+  biomarkers: ProfileBiomarkers
+  birthdate: Date
+  bloodPressureDiastolic: Float
+  bloodPressureSystolic: Float
+  bodyMassIndex: Float
+  caloricDifference: Int
+  clickId: String
+  coachSet(
+    after: String
+    before: String
+    first: Int
+    last: Int
+    offset: Int
+  ): CoachConnection!
+  contentlibrarySet(
+    after: String
+    before: String
+    first: Int
+    last: Int
+    offset: Int
+  ): ContentLibraryTypeConnection!
+  country: String
+  cpcs: [UUID!]!
+  createdAt: DateTime
+  customAttributes: JSONString
+  dailyCaloricIntakeGoal: Int
+  dashboardprofileSet(
+    after: String
+    before: String
+    first: Int
+    id: UUID
+    last: Int
+    offset: Int
+  ): JourneyProfileTypeConnection!
+  debugMealPlanVariables: DebugMealPlanVariables!
+  email: String!
+  encodedAttributes: String
+  encodedAttributesJwk: String
+  ethnicity: UUID
+  extraData: JSONString
+  gender: String
+  glucoseLevel: Float
+  goal: UUID
+  goals: [String!]!
+  goalsOn: Boolean!
+  googleplaytransactionSet(
+    after: String
+    before: String
+    first: Int
+    id: UUID
+    last: Int
+    offset: Int
+  ): GooglePlayTransactionTypeConnection!
+  hasNotifications: Boolean
+  hasOnboarded: Boolean!
+  height: Float
+  id: UUID!
+  isImperial: Boolean!
+  isPremium: Boolean
+  isTesting: Boolean!
+  journeyStarted: Boolean
+  language: String!
+  lat: String
+  listitemSet(
+    after: String
+    before: String
+    first: Int
+    last: Int
+    offset: Int
+    recipe: ID
+  ): ListItemConnection!
+  lon: String
+  mpCalories: Int
+  mpCarbsPerc: Float
+  mpDays: Int
+  mpDiversity: ProfileMpDiversity
+  mpError: Float
+  mpFatPerc: Float
+  mpFormat: [String!]!
+  mpMonounsaturatedFatPerc: Float
+  mpOmega3Perc: Float
+  mpPolyunsaturatedFatPerc: Float
+  mpProteinPerc: Float
+  mpSaturatedFatPerc: Float
+  mpTransFatPerc: Float
+  mychecklistitemSet(
+    after: String
+    before: String
+    first: Int
+    id: ID
+    last: Int
+    offset: Int
+  ): MyChecklistItemConnection!
+  needsNewPassword: Boolean!
+  noteSet(
+    after: String
+    before: String
+    eventId: ID
+    first: Int
+    id: ID
+    last: Int
+    offset: Int
+  ): NoteConnection!
+  profilerecommendationSet: [ProfileRecommendationType!]!
+  program: Program
+  programName: String
+  restrictions: [Restriction]
+  sendbirdAccessToken: String!
+  sendbirdHasEverLoggedIn: Boolean!
+  sendbirdToken: String
+  snps: [UUID!]!
+  startingWeight: Float
+  subscription: SubscriptionType
+  tags: [String!]
+  targetWeight: Float
+  timezone: String!
+  totalDailyEnergyExpenditure: Int
+  updatedAt: DateTime
+  userId: String
+  weeklyWeightGoal: WeeklyWeightGoal
+  weight: Float
+}
+
+type Program implements Node {
+  author: String
+  authorAvatar: String
+  authors: [UUID!]
+  backgroundImage: String
+  books: JSONString
+  comment: String!
+  contentlibrarySet(
+    after: String
+    before: String
+    first: Int
+    last: Int
+    offset: Int
+  ): ContentLibraryTypeConnection!
+  cover: String
+  cpcsIngredientGroups: CPCIngredientGroup
+  createdAt: DateTime!
+  databaseId: String
+  defaultVideoThumnail: String
+  descriptionLong: String
+  descriptionShort: String
+  id: ID!
+  image: String
+  isActive: Boolean!
+  isPremium: Boolean!
+  name: String!
+  order: Int!
+  restrictions(encoded: Boolean): [String!]!
+  showDefaultGoals: Boolean!
+  slug: String
+  tags: [String!]!
+  visibility: Boolean!
+}
+
+type ProgramConnection {
+  edges: [ProgramEdge]!
+  pageInfo: PageInfo!
+}
+
+type ProgramEdge {
+  cursor: String!
+  node: Program
+}
+
+input ProgramOrderBy {
+  field: ProgramOrderByField = created_at
+  order: SortOrder = ASC
+}
+
+enum ProgramOrderByField {
+  author
+  created_at
+  name
+}
+
+type PublishEvent {
+  message: String
+  success: Boolean
+}
+
+type PurchaseMealRecipe {
+  message: String
+  success: Boolean
+}
+
+type Query {
+  allIngredients: [String]
+  appointmentCredits: AppointmentCredits!
+  appointmentTypes(
+    after: String
+    before: String
+    first: Int
+    last: Int
+    offset: Int
+  ): AppointmentTypeConnection
+  autocomplete(
+    after: String
+    before: String
+    enter: Boolean
+    first: Int
+    last: Int
+    mealType: MealType
+    mealTypes: [MealType]
+    query: String
+  ): OutoCompleteConnection
+  barcodeSearch(barcode: String!): FoodProduct
+  brandedFoods(
+    after: String
+    barcode: String
+    before: String
+    filter: FoodFilter
+    first: Int
+    last: Int
+    query: String
+  ): BrandedFoodConnection
+  checkedIntakes(
+    category: IntakeCategory!
+    end: Date!
+    start: Date!
+  ): DailyChecklist
+  coachAvailability(
+    appointmentType: ID!
+    end: DateTime!
+    start: DateTime!
+  ): [TimePeriod!]!
+  commonFoods(
+    after: String
+    before: String
+    filter: FoodFilter
+    first: Int
+    last: Int
+    query: String
+  ): CommonFoodConnection
+  contentCategories(
+    after: String
+    before: String
+    first: Int
+    id: ID
+    last: Int
+    offset: Int
+  ): ContentCategoryTypeConnection
+  contentLibrary(
+    after: String
+    before: String
+    categories: [ID]
+    first: Int
+    last: Int
+    offset: Int
+    order: ContentLibraryOrderBy
+    search: String
+    tags: [String!]
+  ): ContentLibraryTypeConnection
+  countries: [GenericScalar]
+  currentJourneys(
+    after: String
+    before: String
+    first: Int
+    id: UUID
+    journeyId: ID
+    last: Int
+    offset: Int
+  ): JourneyProfileTypeConnection
+  customMealPlan(
+    breakfastDistribution: Float
+    calories: Int!
+    carbs: Float
+    days: Int
+    dinnerDistribution: Float
+    error: Float
+    fat: Float
+    format: [MealTime]!
+    lunchDistribution: Float
+    maxIngredientsCount: IntValueByMealTime
+    maxTimeMinutes: IntValueByMealTime
+    omega3: Float
+    program: ID
+    protein: Float
+    skipRecipes: [ID!]
+    snackDistribution: Float
+  ): [MealPlanDay]
+  dailyRecap(date: Date!): [DailyQuestion!]!
+  dailyRecapQuestions: [DailyQuestion!]!
+  dailyRecaps(endDate: Date!, startDate: Date!): [DailyRecap!]!
+  dashboard: Dashboard
+  featureLimitations: [AppRestriction!]!
+  featuredRecipesByProgram(programId: String): [Recipe]
+  foodLog(id: ID!): MealLog
+  foodLogs(
+    after: String
+    end: Date!
+    first: Int
+    id: ID
+    start: Date!
+  ): FoodLogConnection!
+  foodLogsByUser(
+    after: String
+    before: String
+    first: Int
+    fromDate: Date!
+    last: Int
+    toDate: Date!
+    userId: String!
+  ): MealLogConnection
+  frequentMealLogs: [MealLog]
+  googleTransaction(
+    after: String
+    before: String
+    first: Int
+    id: UUID
+    last: Int
+    offset: Int
+  ): GooglePlayTransactionTypeConnection
+  hydration(endDate: Date!, startDate: Date!): [Hydration!]!
+  ingredientSearch(
+    after: String
+    before: String
+    first: Int
+    last: Int
+    query: String = "Query search term"
+  ): IngredientSearchResultConnection
+  isUserProgramStarted: Boolean
+  labTestReports(
+    after: String
+    before: String
+    first: Int
+    id: ID
+    isVisible: Boolean
+    last: Int
+    profile: ID
+  ): LabTestReportConnection
+  locationAutocomplete(
+    lat: Float!
+    lon: Float!
+    query: String!
+  ): [LocationAutocomplete]
+  log(id: ID!): Logger
+  logs(
+    after: String
+    before: String
+    first: Int
+    last: Int
+    sortBy: SortBy
+    sortOrder: SortOrder
+    user: String
+  ): LoggerConnection
+  macroGoals(date: Date!): MacroGoals
+  mealLog(
+    after: String
+    before: String
+    first: Int
+    fromDate: Date!
+    last: Int
+    toDate: Date!
+  ): MealLogConnection
+  mealLogMacroAggs(fromDate: Date!, toDate: Date!): MealLogMacroAggs
+  mealPlan(fromDate: Date): [MealPlanDay]
+  mealPlanTemplate(id: ID!): MealPlanTemplate
+  mealPlanTemplates(
+    after: String
+    before: String
+    byCoach: ID
+    excludeCoach: ID
+    first: Int
+    isPublic: Boolean
+    last: Int
+    newerFirst: Boolean
+    offset: Int
+    search: String
+  ): MealPlanTemplateConnection
+  mealPlannerByCustomFormat(format: [MealTime]!): MealCustomPlannerDays
+  mealPlannerByDay(mealPlannerQueryType: MealPlannerQueryType!): MealPlannerDays
+  mealTracker(endDate: Date!, startDate: Date!): [MealTrack]!
+  menuitem(id: ID!): MenuItem
+  menuitemByProgram(databaseId: String!, programId: String!): MenuItem
+  menuitemMealTags: [String]
+  menuitemSearch(
+    after: String
+    before: String
+    course: String
+    first: Int
+    last: Int
+    meals: [String]
+    menu: String
+    query: String
+    restaurantId: String
+    tags: [String]
+  ): MenuItemConnection
+  menuitemTags: [String]
+  menuitems(restaurantId: String!): [MenuItem]
+  menuitemsByProgram(programId: String!, restaurantId: String!): [MenuItem]
+  myBrandedFoods(
+    after: String
+    before: String
+    first: Int
+    id: String
+    last: Int
+  ): MyBrandedFoodConnection
+  myChecklistItems(
+    after: String
+    before: String
+    first: Int
+    id: ID
+    last: Int
+    offset: Int
+  ): MyChecklistItemConnection
+  myCoaches(
+    after: String
+    before: String
+    first: Int
+    id: ID
+    last: Int
+    offset: Int
+  ): CoachConnection
+  myCommonFoods(
+    after: String
+    before: String
+    first: Int
+    id: String
+    last: Int
+  ): MyCommonFoodConnection
+  myFavoriteMenuitems(
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): MenuItemConnection
+  myFavoriteRecipes(
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): RecipeConnection
+  myFavoriteRestaurants(
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): RestaurantConnection
+  myProfile: ProfileType
+  myRecipes(
+    after: String
+    before: String
+    first: Int
+    id: ID
+    last: Int
+  ): UserRecipeConnection
+  notes(
+    after: String
+    before: String
+    eventId: ID
+    first: Int
+    id: ID
+    last: Int
+    offset: Int
+  ): NoteConnection
+  onProgramPopularRestaurants(lat: Float!, lon: Float!): [Restaurant]
+  outocomplete(
+    after: String
+    before: String
+    enter: Boolean
+    first: Int
+    last: Int
+    mealType: MealType
+    mealTypes: [MealType]
+    query: String
+  ): OutoCompleteConnection @deprecated(reason: "Deprecating soon.")
+  ownFoodItem(id: ID!): MealLog
+  ownFoodItems(
+    after: String
+    before: String
+    first: Int
+    fromDate: Date
+    last: Int
+    toDate: Date
+  ): MealLogConnection
+  ownMealLog(id: ID!): MealLog
+  ownMealLogs: [MealLog]
+  ownRecipe(id: ID!): MealLog
+  ownRecipes(
+    after: String
+    before: String
+    first: Int
+    fromDate: Date
+    last: Int
+    toDate: Date
+  ): MealLogConnection
+  popularRecipes(
+    after: String
+    before: String
+    first: Int
+    hidePurchasable: Boolean = true
+    last: Int
+  ): RecipeConnection
+  premiumProgramRecipes(
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): RecipeConnection
+  profileRecommendations: [ProfileRecommendationType]
+  program(id: ID!): Program
+  programs(
+    after: String
+    before: String
+    first: Int
+    isActive: Boolean
+    isPremium: Boolean
+    last: Int
+    offset: Int
+    orderBy: ProgramOrderBy
+  ): ProgramConnection
+  quizAnswers: [QuizAnswer!]!
+  quizPrograms: [QuizProgram]
+  recentMealLogs: [MealLog]
+  recipe(id: ID!): Recipe
+  recipeMealTags: [String]
+  recipeSearch(
+    after: String
+    before: String
+    cuisines: [String]
+    dietaryTag: DietaryTag
+    filter: FoodFilter
+    first: Int
+    hasImage: Boolean
+    hasInstructions: Boolean
+    ingredients: [String]
+    isPremium: Boolean
+    last: Int
+    macroNutrientsRange: MacroNutrientsRangeInput
+    maxPrepTime: Int
+    mealTime: RecipeMealTime
+    meals: [String]
+    minPrepTime: Int
+    numberOfIngredients: Int
+    program: String
+    query: String
+    skillLevel: SkillLevel
+    tags: [String]
+    totalTime: Float
+  ): RecipeConnection
+  recipeSwapOptions(recipeId: String, serving: Int): RecipeSwapOptions
+  recipeTags: [String]
+  recipesByMealTime(
+    after: String
+    before: String
+    dietaryTags: [DietaryTag]
+    first: Int
+    hidePurchasable: Boolean = true
+    last: Int
+    maxPrepTime: Int
+    mealTime: RecipeMealTime
+  ): RecipeConnection
+  recipesByTag(
+    after: String
+    before: String
+    dietaryTags: [DietaryTag]
+    first: Int
+    hidePurchasable: Boolean = true
+    last: Int
+    maxPrepTime: Int
+    tag: String
+  ): RecipeConnection
+  recommendedMenuitems(lat: Float!, lon: Float!): [MenuItem]
+  recommendedSwaps(
+    forSimpleMealPlan: Boolean
+    mealTime: RecipeMealTime
+  ): RecommendedSwaps
+  restaurant(id: ID!): Restaurant
+  restaurantAutocomplete(lat: Float!, lon: Float!, query: String!): [Restaurant]
+  restaurantRecommendedMenuitems(restaurantId: String!): [MenuItem]
+  restaurantSearch(
+    address: String
+    after: String
+    before: String
+    cuisines: [String]
+    distance: Int = 3
+    first: Int
+    geoBoundingBox: GeoBoundingBox
+    gotAr: Boolean
+    isOpen: Boolean
+    last: Int
+    lat: Float
+    lon: Float
+    meals: [String]
+    postalCode: String
+    priceRating: [PriceRate]
+    program: String
+    query: String
+    stateProvince: String
+  ): RestaurantConnection
+  restaurantSearchByLocation(
+    cuisine: String
+    geoBoundingBox: GeoBoundingBox
+    geolat: Float
+    geolon: Float
+    lat: Float!
+    lon: Float!
+    query: String
+  ): RestaurantSearchResult
+  restaurantsByLocation(
+    after: String
+    before: String
+    first: Int
+    last: Int
+    lat: Float
+    lon: Float
+  ): RestaurantConnection
+  restriction(id: ID!): Restriction
+  restrictions(
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): RestrictionConnection
+  searchProfile(email: String!): ProfileType
+  searchRecipeByNameOrIngredient(query: String): RecipeSearchResult
+  searchRecipesByIngredients(
+    after: String
+    before: String
+    first: Int
+    last: Int
+    mustIngredients: [String]
+  ): RecipeConnection
+  serchForAllowedIngredient(ingredient: String!): [CPCIngredient]
+  shoppingList(
+    after: String
+    before: String
+    first: Int
+    last: Int
+    offset: Int
+    recipe: ID
+  ): ListItemConnection
+  shoppingListAggregate(
+    after: String
+    before: String
+    first: Int
+    id: UUID
+    last: Int
+    offset: Int
+  ): AggregateConnection
+  shoppingListBadge: Boolean
+  similarMacrosRecipes(recipeId: String, serving: Int, size: Int): [Recipe]
+  streaks(endDate: Date!, startDate: Date!): [Streak!]!
+  streaksStats(endDate: Date!, startDate: Date!): StreaksStats!
+  subscriptions(
+    after: String
+    before: String
+    first: Int
+    id: UUID
+    last: Int
+    offset: Int
+  ): SubscriptionTypeConnection
+  suggestMeal(date: Date!, mealTime: MealTime!): SuggestedMeal
+  suggestedMeals(date: Date!): SuggestedMeals
+  todayFoods(endDate: Date!, startDate: Date!): Checklist
+    @deprecated(reason: "No longer supported. Use checkedIntakes instead")
+  todaySupplements(endDate: Date!, startDate: Date!): Checklist
+    @deprecated(reason: "No longer supported. Use checkedIntakes instead")
+  trendingRecipes(
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): RecipeConnection
+  usdaFoodByNdbNumber(ndbNumber: String): UsdaFood
+  users(
+    after: String
+    before: String
+    first: Int
+    last: Int
+    profileUUIDs: [String!]
+    userUUIDs: [String!]
+  ): UserConnection
+  weightTracker(endDate: Date!, startDate: Date!): WeightTracker
+}
+
+type QuizAnswer {
+  categoryName: String
+  id: ID!
+  keyLabel: String
+  label: String!
+}
+
+type QuizInfo {
+  isActive: Boolean
+  label: String
+}
+
+type QuizProgram {
+  author: String
+  authorAvatar: String
+  backgroundImage: String
+  description: String
+  experience: QuizInfo
+  health: QuizInfo
+  isPremium: String
+  name: String
+  preferences: QuizInfo
+  programId: String
+}
+
+input Range {
+  gte: Float!
+  lte: Float!
+}
+
+input RangeByMealTimeInput {
+  breakfast: RangeInput
+  dinner: RangeInput
+  lunch: RangeInput
+  snack: RangeInput
+}
+
+input RangeFilter {
+  gte: Float
+  lte: Float
+}
+
+input RangeInput {
+  max: Int
+  min: Int
+}
+
+type RawNutrientsFull {
+  cholesterol: Float
+  energy: Float
+  fiber: Float
+  potassiumK: Float
+  saturatedFat: Float
+  sodiumNa: Float
+  transFats: Float
+}
+
+type Recipe implements Node {
+  adherence: Float @deprecated(reason: "Not used, will be removed")
+  adherenceDetails: Adherence
+  author: String
+  authorAvatar: String
+  authors: String @deprecated(reason: "Use author instead of this")
+  caloriesPerServing: CaloriesPerServing
+  cleanName: String
+  completeNutritionEstimates: GenericScalar
+    @deprecated(reason: "Use nutritionalInfo or nutrientsPerServing instead")
+  course: String @deprecated(reason: "Use courses instead")
+  courses: [String]
+  cuisine: String @deprecated(reason: "Use cuisines instead")
+  cuisines: [String]
+  databaseId: String
+  datasetType: String @deprecated(reason: "Not used, internal use only")
+  externalId: String
+  favoritesCount: Int
+  hasTrainableIngredients: Boolean
+  id: ID!
+  inUserShoppingList: Boolean
+  indexedAt: DateTime
+  ingredientLines: [String]
+  ingredients: [Ingredient]
+  ingredientsCount: Int
+  instructions: [String]
+  isActive: Boolean
+  isFeatured: Boolean
+  isIndexed: Boolean @deprecated(reason: "Not used, will be removed")
+  isLogged: Boolean
+  isPremium: Boolean
+  isPurchasable: Boolean
+  isRestricted: Boolean
+  isUserFavorite: Boolean
+  language: String
+  logo: String
+  mainImage: String
+  mealTags: [String]
+  name: String
+  nameLowercase: String @deprecated(reason: "Not used, will be removed")
+  numberOfServings: Int
+  nutrients: Nutrients
+    @deprecated(reason: "Use nutritionalInfo or nutrientsPerServing instead")
+  nutrientsFull: RawNutrientsFull
+    @deprecated(reason: "Use nutritionalInfo or nutrientsPerServing instead")
+  nutrientsPerServing: NutrientsPerServing
+  nutritionEstimates: NutritionEstimates
+    @deprecated(reason: "Use nutritionalInfo or nutrientsPerServing instead")
+  nutritionalInfo: NutritionalInfo
+  parsedIngredientLines(preferredUnitSystem: UnitSystem): [IngredientLine]
+    @deprecated(reason: "Not used, will be removed")
+  programIds: [String]
+  rating: Int
+  recipeType: String
+  relativeCalories: RelativeCalories
+  serving: Int
+  servingWeight: Float
+  servings: [Servings] @deprecated(reason: "Not used, will be removed")
+  sgCuisines: [String]
+  sgScores: SgScores @deprecated(reason: "Not used, internal use only")
+  sgValidated: Boolean
+  source: Source
+  sourceUrl: String @deprecated(reason: "Use Source.recipeUrl instead")
+  sourceUrlNotWorks: Boolean @deprecated(reason: "Not used, will be removed")
+  sourceUrlWorks: Boolean!
+  squareImage: String
+  syntaxIngs: [String]
+  tags: [String]
+  text: String
+  totalTime: String
+  totalTimeInSeconds: Int
+  updatedAt: DateTime
+  url: String @deprecated(reason: "Use Source.recipeUrl instead")
+  usersFavorite: [String]
+  usersShoppingList: [String]
+  weightInGrams: Float
+  yieldText: String
+}
+
+type RecipeConnection {
+  edges: [RecipeEdge]!
+  pageInfo: PageInfo!
+}
+
+type RecipeEdge {
+  cursor: String!
+  node: Recipe
+}
+
+enum RecipeMealTime {
+  BREAKFAST
+  DINNER
+  LUNCH
+  SNACK
+  TREAT_DESSERT
+}
+
+type RecipeSearchResult {
+  onPlan: [Recipe]
+  otherResults: [Recipe]
+}
+
+type RecipeSwapOptions {
+  onPlan(size: Int): [Recipe]
+  similar(size: Int): [Recipe]
+}
+
+type RecommendationCatalogType {
+  createdAt: DateTime
+  databaseId: String
+  id: UUID!
+  image: String
+  profilerecommendationSet: [ProfileRecommendationType!]!
+  reference: String!
+  subtitle: String
+  textAdditional1: String
+  textAdditional2: String
+  textMain: String
+  title: String!
+  updatedAt: DateTime
+  url: String
+}
+
+type RecommendedSwaps {
+  meals: [Recipe]
+  recipes: [Recipe]
+}
+
+type RelativeCalories {
+  ala: Float
+  carbs: Float
+  dha: Float
+  dpa: Float
+  epa: Float
+  fat: Float
+  monounsaturatedFat: Float
+  omega3: Float
+  polyunsaturatedFat: Float
+  protein: Float
+  saturatedFat: Float
+  transFat: Float
+}
+
+type RemoveFavoriteArticle {
+  message: String!
+  success: Boolean!
+}
+
+type RemoveFromShoppingList {
+  success: Boolean
+}
+
+type RemoveMealLogMutation {
+  success: Boolean
+}
+
+type RemoveMealPlan {
+  message: String
+  success: Boolean
+}
+
+type RemoveMealPlanRecipe {
+  message: String!
+  success: Boolean!
+}
+
+type RemoveOwnMeal {
+  success: Boolean
+}
+
+type RequestResetPassword {
+  message: String!
+  resetPasswordCode: String
+  success: Boolean!
+}
+
+type ResetPassword {
+  message: String!
+  success: Boolean!
+}
+
+type Restaurant implements Node {
+  address1: String
+  businessType: String
+  cityTown: String
+  country: String
+  createdAt: DateTime
+  cuisine: String @deprecated(reason: "Use cuisines instead of cuisine")
+  cuisineTag: String @deprecated(reason: "Use cuisines instead of cuisine_tag")
+  cuisines: [String]
+  databaseId: String
+  description: String
+  favoritesCount: Int
+  gotAr: Boolean
+  hours: Hours
+  id: ID!
+  indexedAt: DateTime
+  isActive: Boolean
+  isClosed: Boolean
+  isOpen: Boolean
+  isOwnerVerified: Boolean
+  isRecomended: Boolean
+  isUserFavorite: Boolean
+  location: [Float]
+  locationId: String
+  maxPriceRange: Float @deprecated(reason: "no longer used")
+  minPriceRange: Float @deprecated(reason: "no longer used")
+  name: String
+  phone: String
+  photos: [String]
+  postalCode: String
+  priceRating: String
+  recommendation: String
+  recommendationsCount: Int
+  shortName: String
+  stateProvince: String
+  suggest: String
+  type: String
+  updatedAt: DateTime
+  usersFavorite: [String]
+  websiteUrl: String
+  yelpRating: Float
+  yelpReviewCount: Int
+}
+
+type RestaurantConnection {
+  edges: [RestaurantEdge]!
+  pageInfo: PageInfo!
+  totalCount: Int
+}
+
+type RestaurantEdge {
+  cursor: String!
+  node: Restaurant
+  other: String
+}
+
+type RestaurantSearchResult {
+  onPlan: [Restaurant]
+  otherResults: [Restaurant]
+}
+
+type Restriction implements Node {
+  databaseId: String @deprecated(reason: "use ID!")
+  id: ID!
+  isOnProgram: Boolean
+  name: String
+  slugname: String
+  subcategory: String
+}
+
+type RestrictionConnection {
+  edges: [RestrictionEdge]!
+  pageInfo: PageInfo!
+}
+
+type RestrictionEdge {
+  cursor: String!
+  node: Restriction
+}
+
+type SelectDailyRecapQuestions {
+  message: String!
+  success: Boolean!
+}
+
+type SendFeedback {
+  message: String
+  success: Boolean
+}
+
+type SensitiveProfileAttributes {
+  errors: [ErrorType]
+  success: Boolean
+}
+
+type Servings {
+  amount: Float
+  description: String
+  equivalent: Float
+  selected: Boolean
+  unit: String
+}
+
+type SetMealPlanToTemplate {
+  message: String!
+  success: Boolean!
+}
+
+type SgScores {
+  keto: Float
+}
+
+input SimpleMPFiltersInput {
+  kcalRange: RangeByMealTimeInput
+  tags: TermValuesByMealTimeInput
+}
+
+enum SkillLevel {
+  EASY
+  EXPERT
+  MEDIUM
+}
+
+enum SortBy {
+  INDEXED_AT
+}
+
+enum SortOrder {
+  ASC
+  DESC
+}
+
+type Source {
+  displayName: String
+  recipeUrl: String!
+  siteUrl: String
+}
+
+type StartJourneys {
+  message: String
+  success: Boolean
+}
+
+type StartOverMealPlan {
+  message: String
+  success: Boolean
+}
+
+type Streak {
+  activities: [EntryType]
+  date: Date
+  dayStatus: DayStatus
+  hasPreviousStreak: Boolean
+  isToday: Boolean
+  longestStreakEver: Int! @deprecated
+  totalPerfectDays: Int! @deprecated
+}
+
+type StreaksStats {
+  longestStreak: Int!
+  totalPerfectDays: Int!
+}
+
+enum SubscriptionBillingPeriod {
+  MONTH
+  ONCE
+  TRI_MONTH
+  YEAR
+}
+
+enum SubscriptionDuration {
+  FOREVER
+  MONTH
+  TRI_MONTH
+  YEAR
+}
+
+type SubscriptionType implements Node {
+  appleId: String
+  billingPeriod: SubscriptionBillingPeriod
+  createdAt: DateTime
+  databaseId: String
+  duration: SubscriptionDuration!
+  googleplaySku: String
+  id: ID!
+  isActive: Boolean!
+  isRecurring: Boolean!
+  name: String!
+  periodPrice: Int!
+  permissions: [String!]
+  totalPrice: Int!
+  trialPeriodDays: Int!
+  updatedAt: DateTime
+}
+
+type SubscriptionTypeConnection {
+  edges: [SubscriptionTypeEdge]!
+  pageInfo: PageInfo!
+}
+
+type SubscriptionTypeEdge {
+  cursor: String!
+  node: SubscriptionType
+}
+
+type SuggestedMeal {
+  databaseId: String
+  isLogged: Boolean
+  loggedDatabaseId: String
+  mainImage: String
+  mealTime: MealTime
+  mealType: MealType
+  name: String
+  nutrients: Nutrients
+    @deprecated(reason: "Use nutritionalInfo or nutrientsPerServing instead")
+  nutrientsPerServing: NutrientsPerServing
+  nutritionalInfo: NutritionalInfo
+  recipeType: String
+  squareImage: String
+}
+
+type SuggestedMeals {
+  breakfast: SuggestedMeal
+  dinner: SuggestedMeal
+  lunch: SuggestedMeal
+  snack: SuggestedMeal
+}
+
+type Suggestion {
+  author: String
+  barcode: String
+  brand: String
+  courses: [String]
+  databaseId: String
+  extraInfo: String
+  foodBlockOrManufacturer: String
+  indexedAt: DateTime
+  isRawIngredient: Boolean
+  isVerified: Boolean
+  location: GeoPoint
+  manufacName: String
+  mealType: MealType
+  mealTypeDisplayName: String
+  name: String
+  nutrients: Nutrients @deprecated(reason: "Use nutritionalInfo instead")
+  nutritionalInfo: NutritionalInfo
+  profileId: String
+  secondaryInfoText: String
+  serving: Int
+  servingWeight: Float
+  servings: [Servings]
+  suggest: String
+  unitOption: String
+  updatedAt: DateTime
+}
+
+type SwapMealPlanRecipe {
+  mealPlan: [MealPlanDay] @deprecated(reason: "Not used, will be removed")
+  message: String
+  success: Boolean
+}
+
+type TaskItemType {
+  id: ID!
+  isCompleted: Boolean
+  keyHash: String
+  name: String
+  taskListId: String
+}
+
+type TaskListType {
+  databaseId: String
+  id: ID!
+  name: String!
+  taskItems: [TaskItemType]
+}
+
+type Tendency {
+  difference: Float
+  type: TendencyType
+}
+
+enum TendencyType {
+  DOWN
+  UP
+}
+
+input TermValuesByMealTimeInput {
+  breakfast: [String!]
+  dinner: [String!]
+  lunch: [String!]
+  snack: [String!]
+}
+
+scalar Time
+
+type TimePeriod {
+  coaches: [Coach!]!
+  end: DateTime!
+  start: DateTime!
+}
+
+type ToggleShoppingListItem {
+  success: Boolean
+}
+
+type ToggleTaskCompleted {
+  message: String
+  success: Boolean
+}
+
+type UncheckIntake {
+  message: String!
+  success: Boolean!
+}
+
+type UncheckTodayFood {
+  message: String!
+  success: Boolean!
+}
+
+type UncheckTodaySupplement {
+  message: String!
+  success: Boolean!
+}
+
+enum UnitSystem {
+  IMPERIAL
+  METRIC
+}
+
+type UpdateAppointment {
+  appointment: Appointment
+  message: String!
+  success: Boolean!
+}
+
+type UpdateAppointmentCredits {
+  credits: AppointmentCredit
+  message: String!
+  success: Boolean!
+}
+
+input UpdateAppointmentInput {
+  appointment: ID!
+  appointmentType: ID
+  contactType: CalendarContactType
+  datetime: DateTime
+  timezone: String
+}
+
+type UpdateHydration {
+  message: String
+  success: Boolean
+}
+
+type UpdateJourneyStatus {
+  message: String
+  success: Boolean
+}
+
+type UpdateLabTestReport {
+  message: String!
+  report: LabTestReport
+  success: Boolean!
+}
+
+type UpdateMealLogMutation {
+  success: Boolean
+}
+
+type UpdateMealPlanSettings {
+  message: String!
+  success: Boolean!
+}
+
+type UpdateMealPlanTemplate {
+  mealPlan: MealPlanTemplate
+  message: String!
+  success: Boolean!
+}
+
+input UpdateMPSettingsInput {
+  calories: Int
+  carbs: Int
+  fat: Int
+  format: [MealTime!]
+  omega3: Float
+  protein: Int
+}
+
+type UpdateMyBrandedFood {
+  message: String!
+  success: Boolean!
+}
+
+input UpdateMyBrandedFoodInput {
+  brandOwner: String
+  brandedFoodCategory: String
+  description: String
+  gtinUpc: String
+  householdServingFulltext: String
+  name: String
+  nutrients: [NutrientInput]
+  servingSize: Float
+  servingSizeUnit: String
+}
+
+type UpdateMyChecklistItem {
+  message: String!
+  myChecklistItem: MyChecklistItem
+  success: Boolean!
+}
+
+type UpdateMyCommonFood {
+  message: String!
+  success: Boolean!
+}
+
+input UpdateMyCommonFoodInput {
+  description: String
+  name: String
+  nutrients: [NutrientInput]
+  portions: [PortionInput]
+}
+
+type UpdateMyRecipe {
+  message: String!
+  recipe: UserRecipe
+  success: Boolean!
+}
+
+input UpdateMyRecipeInput {
+  courses: [String!]
+  cuisines: [String!]
+  ingredientLines: [String!]
+  ingredients: [IngredientAmount!]
+  instructions: [String!]
+  language: Language
+  mainImage: String
+  mealTimes: [MealTime!]
+  name: String
+  numberOfServings: Int
+  squareImage: String
+  tags: [String]
+  text: String
+  totalTime: String
+  totalTimeInSeconds: Int
+}
+
+type UpdateNote {
+  message: String!
+  note: Note
+  success: Boolean!
+}
+
+type UpdateOwnMealMutation {
+  message: String
+  success: Boolean
+}
+
+type UpdateOwnRecipe {
+  message: String!
+  success: Boolean!
+}
+
+type UpdateProfile {
+  errors: [ErrorType]
+  success: Boolean
+}
+
+type UpdateProfileBiomarkers {
+  success: Boolean
+}
+
+type UpdateShoppingListRecipeServings {
+  success: Boolean
+}
+
+type UpdateSubscription {
+  message: String
+  success: Boolean
+}
+
+type UpdateUserProgram {
+  message: String
+  success: Boolean
+}
+
+scalar Upload
+
+type UsdaFood implements Node {
+  commonNames: [String]
+  dataType: String
+  description: String
+  foodDataId: String
+  id: ID!
+  nutrients: [Nutrients]
+  portions: [Portion]
+}
+
+type User implements Node {
+  appleUserSource: String
+  appleUserSourceJson: JSONString
+  avatar: String
+  createdAt: DateTime
+  databaseId: String
+  email: String
+  id: ID!
+  isActive: Boolean
+  isArUser: Boolean
+  name: String
+  organizationId: ID
+  phone: String
+  profileId: String
+  updatedAt: DateTime
+  userSource: String
+}
+
+type UserConnection {
+  edges: [UserEdge]!
+  pageInfo: PageInfo!
+}
+
+type UserEdge {
+  cursor: String!
+  node: User
+}
+
+type UserFavoriteMenuItem {
+  isUserFavorite: Boolean
+  success: Boolean
+}
+
+type UserFavoriteRecipe {
+  isUserFavorite: Boolean
+  message: String!
+  success: Boolean
+}
+
+type UserFavoriteRestaurant {
+  isUserFavorite: Boolean
+  success: Boolean
+}
+
+type UserRecipe implements Node {
+  courses: [String!]!
+  cuisines: [String!]!
+  id: ID!
+  ingredientLines: [String!]!
+  ingredients: [IngredientFoodFormat!]!
+  instructions: String
+  language: Language!
+  mainImage: String
+  mealTimes: [RecipeMealTime!]!
+  name: String!
+  numberOfServings: Int!
+  nutrients: [Nutrient!]
+  nutrientsPerServing: [Nutrient!]
+  servingWeight: Float!
+  squareImage: String
+  tags: [String]
+  text: String
+  totalTime: String
+  totalTimeInSeconds: Int
+  weightInGrams: Float!
+}
+
+type UserRecipeConnection {
+  count: Int
+  edges: [UserRecipeEdge]!
+  pageInfo: PageInfo!
+}
+
+type UserRecipeEdge {
+  cursor: String!
+  node: UserRecipe
+}
+
+scalar UUID
+
+enum WeeklyWeightGoal {
+  GOAL_0_5
+  GOAL_1
+  GOAL_1_0
+  GOAL_1_5
+  GOAL_2
+  GOAL_2_0
+  GOAL_3
+  GOAL_4
+  MAINTAIN
+  MANTAIN
+}
+
+type WeightTracker {
+  entries: [Entry]
+  start: Float
+  tendency: Tendency
+  today: Float
+}
+

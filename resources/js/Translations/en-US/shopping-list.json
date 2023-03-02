@@ -1,0 +1,6 @@
+{
+  "filter.today": "Show today",
+  "filter.meal-plan": "Full meal plan",
+  "title.date": "Shopping list\n<yellow>for {{day}}</yellow>",
+  "title.mealplan": "Shopping list\n<yellow>for {{name}}</yellow>"
+}

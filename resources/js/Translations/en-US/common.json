@@ -1,0 +1,20 @@
+{
+  "number.locale": "en-US",
+  "datetime.locale": "en-US",
+  "stripe.locale": "en",
+  "date-description": "Day {{current}}/{{total}}",
+  "meal-type.breakfast": "Breakfast",
+  "meal-type.lunch": "Lunch",
+  "meal-type.snack": "Snack",
+  "meal-type.dinner": "Dinner",
+  "meal-type.evening-snack": "Evening Snack",
+  "form.date.fields-order": "mdy",
+  "form.general.error.required": "Required",
+  "form.date.error.incomplete": "Incomplete date",
+  "form.date.error.invalid": "Invalid date",
+  "form.date.error.out-of-range": "Date outside of allowed range",
+  "form.phone.error.invalid": "Invalid phone number",
+  "form.avatar.error.invalid": "Something went wrong while loading the file",
+  "form.avatar.error.too-large": "The file you selected is too large, the maximum is {{max_size}}",
+  "form.avatar.error.wrong-type": "The file you selected has the wrong type"
+}

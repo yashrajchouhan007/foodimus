@@ -1,0 +1,20 @@
+{
+  "header.subtitle": "{{mealType}} by <b>{{ambassadorName}}</b>",
+
+  "header-menu.information": "Information",
+  "header-menu.ingredients": "Ingredients",
+  "header-menu.recipe": "Recipe",
+  "header-menu.nutrition": "Nutrition",
+  "ingredients.title": "Ingredients",
+  "ingredients.serves.1": "Serves {{amount}}",
+  "ingredients.serves.2": "Serves {{amount}}",
+  "ingredient.amount.unit": "{{amount}} {{unit}}",
+  "ingredients.shopping-list.content": "## :red[Going grocery shopping?]\n\nGo directly to your shopping list to see everything you need for this meal!",
+  "ingredients.shopping-list.button.label": "Shopping list",
+  "recipe.title": "Recipe",
+  "recipe.servings": "**Note:** if there are measurements in these instructions, you need to multiply them by {{scale}}.",
+  "recipe.step.title": "Step {{step}}",
+  "nutrients.title": "Nutrients",
+  "nutrient.amount.unit": "{{amount}} {{unit}}",
+  "info.no-text": "# Whoa!\n\n**This recipe is so fresh we haven't even written a description yet!**\n\nPlease check back later."
+}

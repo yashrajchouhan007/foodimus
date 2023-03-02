@@ -1,0 +1,10 @@
+{
+  "section.landing.header": "Foodimus",
+  "section.landing.item-start": "Start",
+  "section.about.header": "About",
+  "section.about.item-about-us": "About us",
+  "section.social.header": "Stay in touch",
+  "privacy-policy": "Privacy policy",
+  "terms-and-conditions": "Terms and conditions",
+  "copyright-notice": "\u00A9 2021-{{year}} Foodimus \u2014 All rights reserved \u2014 Made with \u2665 in Amsterdam."
+}

@@ -1,0 +1,84 @@
+{
+    "name": "foodimus/my-foodimus",
+    "type": "project",
+    "description": "My Foodimus.",
+    "keywords": [
+    ],
+    "license": "MIT",
+    "require": {
+        "php": "^8.0",
+        "drobee/nova-sluggable": "^1.2",
+        "fideloper/proxy": "^4.4",
+        "fruitcake/laravel-cors": "^2.0",
+        "guzzlehttp/guzzle": "^7.0.1",
+        "inertiajs/inertia-laravel": "^0.3.5",
+        "inspheric/nova-url-field": "^1.4",
+        "intervention/image": "^2.7",
+        "laravel-shift/blueprint": "^2.0",
+        "laravel-validation-rules/country-codes": "^3.0",
+        "laravel/cashier": "^13.5",
+        "laravel/framework": "^8.40",
+        "laravel/nova": "~3.0",
+        "laravel/sanctum": "^2.6",
+        "laravel/tinker": "^2.5",
+        "league/flysystem-aws-s3-v3": "^1.0",
+        "optimistdigital/nova-color-field": "^1.1",
+        "optimistdigital/nova-settings": "^3.5",
+        "sentry/sentry-laravel": "^2.10",
+        "spatie/laravel-sitemap": "^6.0",
+        "tightenco/ziggy": "^1.2"
+    },
+    "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.6",
+        "facade/ignition": "^2.5",
+        "fakerphp/faker": "^1.9.1",
+        "laravel/breeze": "^1.2",
+        "laravel/sail": "^1.0.1",
+        "mockery/mockery": "^1.4.2",
+        "nunomaduro/collision": "^5.0",
+        "phpunit/phpunit": "^9.3.3",
+        "symplify/easy-coding-standard": "^9.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover --ansi"
+        ],
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "@php artisan key:generate --ansi"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": []
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "repositories": {
+        "nova": {
+            "type": "composer",
+            "url": "https://nova.laravel.com"
+        }
+    }
+}

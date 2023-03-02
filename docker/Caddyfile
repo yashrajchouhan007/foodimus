@@ -1,0 +1,26 @@
+{
+    auto_https disable_redirects
+}
+:443 {
+    tls /ssl/cert.crt /ssl/priv.key
+    reverse_proxy laravel:80 {
+        header_up Host {host}
+        header_up X-Real-IP {remote}
+        header_up X-Forwarded-For {remote}
+        header_up X-Forwarded-Port {server_port}
+        header_up X-Forwarded-Proto {scheme}
+
+        health_timeout 5s
+    }
+}
+:80 {
+    reverse_proxy laravel:80 {
+        header_up Host {host}
+        header_up X-Real-IP {remote}
+        header_up X-Forwarded-For {remote}
+        header_up X-Forwarded-Port {server_port}
+        header_up X-Forwarded-Proto {scheme}
+
+        health_timeout 5s
+    }
+}

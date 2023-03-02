@@ -1,0 +1,18 @@
+{
+  "welcome": "Welcome, {{name}}",
+  "mealplan": "My meal plan",
+  "today": "Today",
+  "shopping-list": "Shopping list",
+  "search": "Browse",
+  "mobile-menu.button-my-foodimus": "My Foodimus",
+  "mobile-menu.button-my-foodimus.today": "Today",
+  "mobile-menu.button-my-foodimus.shopping-list": "Shopping list",
+  "mobile-menu.button-my-foodimus.subscription": "My subscription",
+  "mobile-menu.button-foodimus": "Foodimus",
+  "mobile-menu.button-foodimus.home": "Home",
+  "mobile-menu.button-foodimus.start": "Start",
+  "mobile-menu.button-foodimus.about-us": "About us",
+  "user-menu.button-settings": "Settings",
+  "user-menu.button-logout": "Logout",
+  "user-menu.button-manage": "Manage"
+}

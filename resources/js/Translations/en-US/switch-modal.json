@@ -1,0 +1,16 @@
+{
+  "activate.title": "Activate meal plan?",
+  "activate.content": "Are you sure you want to activate this meal plan?",
+  "activate.button-proceed": "Activate",
+  "activate.button-cancel": "Cancel",
+  "activate-overwrite.title": "Switch meal plan?",
+  "activate-overwrite.content": "If you proceed, your current active meal plan will be deactivated.\nAre you sure?",
+  "activate-overwrite.button-proceed": "Activate",
+  "activate-overwrite.button-cancel": "Cancel",
+  "restart.title": "Restart meal plan?",
+  "restart.content": "If you proceed, your meal plan will be re-generated with your current settings.\nAre you sure?",
+  "restart.button-proceed": "Restart",
+  "restart.button-cancel": "Cancel",
+  "working.title": "We're working on it!",
+  "working.content": "We're finding recipes that will help you reach your goals"
+}
